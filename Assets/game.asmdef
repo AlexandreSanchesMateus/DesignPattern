@@ -1,0 +1,20 @@
+{
+    "name": "Game",
+    "rootNamespace": "Game",
+    "references": [
+        "Unity.InputSystem",
+        "RedStudio.SerializableCallback",
+        "NaughtyAttributes.Core",
+        "Cinemachine",
+        "UnityEngine.Advertisements"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
