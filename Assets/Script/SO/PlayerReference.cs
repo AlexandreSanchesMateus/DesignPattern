@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="PlayerRef")]
-public class PlayerReference : Reference<Entity>
+namespace Game
 {
-    
-}
+    [CreateAssetMenu(menuName = "PlayerRef")]
+    public class PlayerReference : Reference<Entity>
+    {
 
+    }
+}

@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EntityAttack : MonoBehaviour
+namespace Game
 {
-    [SerializeField] AttackZone _attackZone;
-
-    public event UnityAction OnAttack;
-
-    public void LaunchAttack()
+    public class EntityAttack : MonoBehaviour
     {
-        OnAttack?.Invoke();
-        foreach (var el in _attackZone.InZone)
+        [SerializeField] AttackZone _attackZone;
+
+        public event UnityAction OnAttack;
+
+        public void LaunchAttack()
         {
-            el.Damage(10);
+            OnAttack?.Invoke();
+            foreach (var el in _attackZone.InZone)
+            {
+                el.TakeDamage(10);
+            }
         }
     }
-
-
-
 }

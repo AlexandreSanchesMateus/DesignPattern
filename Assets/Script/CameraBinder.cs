@@ -2,26 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraBinder : MonoBehaviour
+namespace Game
 {
-
-    [SerializeField] Cinemachine.CinemachineVirtualCamera _cam;
-    [SerializeField] PlayerReference _playerRef;
-
-    void Start()
+    public class CameraBinder : MonoBehaviour
     {
-        UpdateCameraFollow(_playerRef.Instance);
 
-        _playerRef.OnValueChanged += UpdateCameraFollow;
-    }
+        [SerializeField] Cinemachine.CinemachineVirtualCamera _cam;
+        [SerializeField] PlayerReference _playerRef;
 
-    private void OnDestroy()
-    {
-        _playerRef.OnValueChanged -= UpdateCameraFollow;
-    }
+        void Start()
+        {
+            UpdateCameraFollow(_playerRef.Instance);
 
-    private void UpdateCameraFollow(Entity obj)
-    {
-        _cam.Follow = obj.transform;
+            _playerRef.OnValueChanged += UpdateCameraFollow;
+        }
+
+        private void OnDestroy()
+        {
+            _playerRef.OnValueChanged -= UpdateCameraFollow;
+        }
+
+        private void UpdateCameraFollow(Entity obj)
+        {
+            _cam.Follow = obj.transform;
+        }
     }
 }

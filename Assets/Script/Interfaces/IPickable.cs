@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace Game
 {
-    public interface IHealth : IDamageable
+    public interface IPickable : IInteractible
     {
-        void Regen(int amount);
-        void Kill();
+        public void Drop();
     }
 }
