@@ -21,7 +21,7 @@ namespace Game.Weapon
 
         public override void PullTrigger()
         {
-            if (_isBetweenShot) return;
+            if (_isBetweenShot || _isReloading) return;
 
             InstanceBullet();
             StartCoroutine(ShotDelay());
@@ -29,6 +29,8 @@ namespace Game.Weapon
 
         public override void ReleaseTrigger()
         {
+            if (_isBetweenShot) return;
+
             _onTriggerRelease?.Invoke();
         }
 
@@ -39,10 +41,7 @@ namespace Game.Weapon
             // Orient Bullet to Weapon Direction
 
             if (--_currentMagSize <= 0)
-            {
-                ReloadWeapon();
-                CancelInvoke();
-            }
+                StartCoroutine(ReloadWeapon());
         }
 
         private IEnumerator ShotDelay()

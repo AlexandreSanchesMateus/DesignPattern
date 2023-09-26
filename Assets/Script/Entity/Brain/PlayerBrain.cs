@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Game.Weapon;
 
 namespace Game
 {
@@ -55,12 +56,12 @@ namespace Game
             _moveInput.action.canceled += StopMove;
 
             // Weapon Interaction
-            _shootInput.action.started += UseWeapon;
+            _shootInput.action.performed += UseWeapon;
             _shootInput.action.canceled += UseWeapon;
+            _reloadInput.action.performed += ReloadWeapon;
 
-            _reloadInput.action.started += ReloadWeapon;
-            _dropInput.action.started += DropWeapon;
-            _throwInput.action.started += ThrowWeapon;
+            _dropInput.action.performed += DropWeapon;
+            _throwInput.action.performed += ThrowWeapon;
 
             // AIM
             _aimDirectionInput.action.started += SetAimDirection;
@@ -78,11 +79,12 @@ namespace Game
             _moveInput.action.canceled -= StopMove;
 
             // Weapon Interaction
-            _shootInput.action.started -= UseWeapon;
+            _shootInput.action.performed -= UseWeapon;
             _shootInput.action.canceled -= UseWeapon;
-            _reloadInput.action.started -= ReloadWeapon;
-            _dropInput.action.started -= DropWeapon;
-            _throwInput.action.started -= ThrowWeapon;
+            _reloadInput.action.performed -= ReloadWeapon;
+
+            _dropInput.action.performed -= DropWeapon;
+            _throwInput.action.performed -= ThrowWeapon;
 
             // AIM
             _aimDirectionInput.action.started -= SetAimDirection;
@@ -96,13 +98,13 @@ namespace Game
         private void UpdateMove(InputAction.CallbackContext obj) => _movement.Move(obj.ReadValue<Vector2>().normalized);
         private void StopMove(InputAction.CallbackContext obj) => _movement.Move(Vector2.zero);
 
-        private void UseWeapon(InputAction.CallbackContext obj) => _weaponInteraction.UseWeapon(obj.started);
+        private void UseWeapon(InputAction.CallbackContext obj) => _weaponInteraction.UseWeapon(obj.performed);
         private void ReloadWeapon(InputAction.CallbackContext obj) => _weaponInteraction.ReloadWeapon();
 
         private void DropWeapon(InputAction.CallbackContext obj) => _weaponInteraction.DropWeapon();
         private void ThrowWeapon(InputAction.CallbackContext obj) => _weaponInteraction.ThrowWeapon();
 
         private void SetAimPosition(InputAction.CallbackContext obj) => _aim.SetAimPosition(obj.ReadValue<Vector2>());
-        private void SetAimDirection(InputAction.CallbackContext obj) => _aim.SetAimPosition(obj.ReadValue<Vector2>().normalized);
+        private void SetAimDirection(InputAction.CallbackContext obj) => _aim.SetAimDirection(obj.ReadValue<Vector2>().normalized);
     }
 }

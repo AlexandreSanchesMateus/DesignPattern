@@ -51,18 +51,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Throw",
+                    "name": "Thow",
                     "type": "Button",
-                    "id": "75077786-bc29-4ee7-b008-a8cf73ca1a74",
+                    "id": "bb9082a0-ed12-4364-a214-2f5e713fa087",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap",
+                    "interactions": "Tap(duration=0.4)",
                     "initialStateCheck": false
                 },
                 {
                     "name": "Drop",
                     "type": "Button",
-                    "id": "bb9082a0-ed12-4364-a214-2f5e713fa087",
+                    "id": "cd7c9d87-d19b-42c4-a2fe-30fcaacd492c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Hold",
@@ -237,34 +237,12 @@
                 },
                 {
                     "name": "",
-                    "id": "b3c28a3f-e89a-4600-9dc1-dbfd82ec230b",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "12c9e3ba-dd93-4430-9218-1ae05d074bc1",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Throw",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "82e11b18-67c8-48c5-82be-85e2c689dc4c",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Drop",
+                    "action": "Thow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -275,7 +253,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Drop",
+                    "action": "Thow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -298,6 +276,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1f0266b-0cf2-4bbf-8b1c-5af2a15bd4e2",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "64ce1a66-b69e-46bc-ba6d-d7ca8a69141b",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

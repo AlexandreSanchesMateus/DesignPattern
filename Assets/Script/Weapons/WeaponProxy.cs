@@ -14,9 +14,9 @@ namespace Game.Weapon
         public void PullTrigger() => _target.PullTrigger();
 
 
-        public void ReleaseTrigger() => ReleaseTrigger();
-        public void Reload() => Reload();
-        public void SetOrientation() => SetOrientation();
+        public void ReleaseTrigger() => _target.ReleaseTrigger();
+        public void Reload() => _target.Reload();
+        public void SetOrientation(Vector2 direction) => _target.SetOrientation(direction);
         public void Throw() => _target.Throw();
     }
 }

@@ -9,6 +9,6 @@ namespace Game
         public void PullTrigger();
         public void ReleaseTrigger();
         public void Reload();
-        public void SetOrientation();
+        public void SetOrientation(Vector2 direction);
     }
 }
