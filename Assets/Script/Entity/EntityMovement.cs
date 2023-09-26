@@ -54,8 +54,11 @@ namespace Game
             else _onContinueWalking?.Invoke();
 
 
-            if (Input.GetKeyDown(KeyCode.Space))
-                MoveDirection = invoker.UndoCommand();
+            if (Input.GetKey(KeyCode.Space))
+            {
+                transform.parent.transform.position = invoker.UndoCommand();
+                Time.timeScale = 0.1f;
+            }
             // Physics
             _rb.AddForce(MoveDirection * _startSpeed * Time.fixedDeltaTime, ForceMode2D.Force);
 
@@ -65,7 +68,9 @@ namespace Game
 
         public void Move(Vector2 direction) {
             IcommandMovement storedCommand = new EntityMovementCommand(this);
-            MoveDirection=invoker.AddCommand(direction, storedCommand);
+            MoveDirection = direction.normalized;
+            invoker.AddCommand(transform.position, storedCommand);
+            Time.timeScale = 1f;
             //MoveDirection = storedCommand.Execute(direction);
         }
         public void MoveToward(Transform target) => MoveDirection = (target.position - _rb.transform.position).normalized;

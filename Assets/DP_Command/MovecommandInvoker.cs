@@ -9,26 +9,26 @@ namespace Game
     {
         Stack<IcommandMovement> _commandList;
         IcommandMovement _onCommand;
+
         public MovecommandInvoker()
         {
-            _commandList = new Stack<IcommandMovement>();   
-
-
+            _commandList = new Stack<IcommandMovement>();
         }
 
-        public Vector2 AddCommand(Vector2 dir,IcommandMovement newCommand)
+        public Vector2 AddCommand(Vector2 pos,IcommandMovement newCommand)
         {
             _commandList.Push(newCommand);
-            return newCommand.Execute(dir);
+            return newCommand.Execute(pos);
         }
-        public Vector2 UndoCommand()
+        public Vector3 UndoCommand()
         {
+
             if (_commandList.Count > 0)
             {
                 IcommandMovement lastesCommand = _commandList.Pop();
                 return lastesCommand.Undo();
             }
-            return Vector2.zero;
+            return Vector3.zero;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Game
 {
     public interface IcommandMovement
     {
-        Vector2 Execute(Vector2 direction);
-        Vector2 Undo();
+        Vector2 Execute(Vector2 pos);
+        Vector3 Undo();
     }
 }
