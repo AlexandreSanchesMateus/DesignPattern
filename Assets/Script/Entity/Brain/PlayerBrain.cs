@@ -33,61 +33,41 @@ namespace Game
     public class PlayerBrain : MonoBehaviour
     {
         [SerializeField, BoxGroup("Dependencies")] EntityMovement _movement;
+        [SerializeField, BoxGroup("Dependencies")] EntityWeaponInteraction _weaponInteraction;
+        [SerializeField, BoxGroup("Dependencies")] EntityAim _aim;
+        // [SerializeField, BoxGroup("Dependencies")] EntityMovement _command;
 
         [SerializeField, BoxGroup("Input")] InputActionProperty _moveInput;
-        [SerializeField, BoxGroup("Input")] InputActionProperty _attackInput;
+
+        [SerializeField, BoxGroup("Input")] InputActionProperty _aimPositionInput;
+        [SerializeField, BoxGroup("Input")] InputActionProperty _aimDirectionInput;
+
+        [SerializeField, BoxGroup("Input")] InputActionProperty _shootInput;
+        [SerializeField, BoxGroup("Input")] InputActionProperty _reloadInput;
+        [SerializeField, BoxGroup("Input")] InputActionProperty _dropInput;
+        [SerializeField, BoxGroup("Input")] InputActionProperty _throwInput;
 
         private void Start()
         {
-            // Move
+            // move
             _moveInput.action.started += UpdateMove;
             _moveInput.action.performed += UpdateMove;
             _moveInput.action.canceled += StopMove;
-            // Attack
-            //_attackInput.action.started += Attack;
-        }
 
+            // Weapon Interaction
+            _shootInput.action.started += UseWeapon;
+            _shootInput.action.canceled += UseWeapon;
 
+            _reloadInput.action.started += ReloadWeapon;
+            _dropInput.action.started += DropWeapon;
+            _throwInput.action.started += ThrowWeapon;
 
+            // AIM
+            _aimDirectionInput.action.started += SetAimDirection;
+            _aimDirectionInput.action.performed += SetAimDirection;
 
-        void run()
-        {
-            var speedbase = 10;
-            var armurespeed = 1.3;
-            var coffeefactor = 1.2f;
-
-
-            var s = speedbase * armurespeed * coffeefactor;
-        }
-
-
-
-
-
-        Coroutine _maCoroutine;
-        public void RunCoucou()
-        {
-            if (_maCoroutine != null) return;
-
-            int i = 10;
-            _maCoroutine = StartCoroutine(coucouRoutine());
-            IEnumerator coucouRoutine()
-            {
-                Animation a = GetComponent<Animation>();
-                yield return new AnimationWait(a);
-                yield return a.PlayAndWaitCompletion();
-
-                var wait = new WaitForSeconds(10f);
-                i++;
-                yield return wait;
-                i++;
-                yield return wait;
-                i++;
-                yield return wait;
-
-                _maCoroutine = null;
-                yield break;
-            }
+            _aimPositionInput.action.started += SetAimPosition;
+            _aimPositionInput.action.performed += SetAimPosition;
         }
 
         private void OnDestroy()
@@ -96,16 +76,33 @@ namespace Game
             _moveInput.action.started -= UpdateMove;
             _moveInput.action.performed -= UpdateMove;
             _moveInput.action.canceled -= StopMove;
+
+            // Weapon Interaction
+            _shootInput.action.started -= UseWeapon;
+            _shootInput.action.canceled -= UseWeapon;
+            _reloadInput.action.started -= ReloadWeapon;
+            _dropInput.action.started -= DropWeapon;
+            _throwInput.action.started -= ThrowWeapon;
+
+            // AIM
+            _aimDirectionInput.action.started -= SetAimDirection;
+            _aimDirectionInput.action.performed -= SetAimDirection;
+
+            _aimPositionInput.action.started -= SetAimPosition;
+            _aimPositionInput.action.performed -= SetAimPosition;
         }
 
 
-        private void UpdateMove(InputAction.CallbackContext obj)
-        {
-            _movement.Move(obj.ReadValue<Vector2>().normalized);
-        }
-        private void StopMove(InputAction.CallbackContext obj)
-        {
-            _movement.Move(Vector2.zero);
-        }
+        private void UpdateMove(InputAction.CallbackContext obj) => _movement.Move(obj.ReadValue<Vector2>().normalized);
+        private void StopMove(InputAction.CallbackContext obj) => _movement.Move(Vector2.zero);
+
+        private void UseWeapon(InputAction.CallbackContext obj) => _weaponInteraction.UseWeapon(obj.started);
+        private void ReloadWeapon(InputAction.CallbackContext obj) => _weaponInteraction.ReloadWeapon();
+
+        private void DropWeapon(InputAction.CallbackContext obj) => _weaponInteraction.DropWeapon();
+        private void ThrowWeapon(InputAction.CallbackContext obj) => _weaponInteraction.ThrowWeapon();
+
+        private void SetAimPosition(InputAction.CallbackContext obj) => _aim.SetAimPosition(obj.ReadValue<Vector2>());
+        private void SetAimDirection(InputAction.CallbackContext obj) => _aim.SetAimPosition(obj.ReadValue<Vector2>().normalized);
     }
 }
