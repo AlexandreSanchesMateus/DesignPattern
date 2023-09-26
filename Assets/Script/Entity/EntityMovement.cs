@@ -21,11 +21,12 @@ namespace Game
         public event UnityAction OnStopWalking { add => _onStopWalking.AddListener(value); remove => _onStopWalking.RemoveListener(value); }
         #endregion
 
-        Vector2 MoveDirection { get; set; }
+        public Vector2 MoveDirection { get; private set; }
         Vector2 OldVelocity { get; set; }
 
         public Alterable<float> CurrentSpeed { get; private set; }
 
+        MovecommandInvoker invoker;
         #region EDITOR
 #if UNITY_EDITOR
         private void Reset()
@@ -38,7 +39,7 @@ namespace Game
 
         private void Awake()
         {
-
+            invoker = new MovecommandInvoker();
             CurrentSpeed = new Alterable<float>(_startSpeed);
 
         }
@@ -52,6 +53,9 @@ namespace Game
                 _onStartWalking?.Invoke();
             else _onContinueWalking?.Invoke();
 
+
+            if (Input.GetKeyDown(KeyCode.Space))
+                MoveDirection = invoker.UndoCommand();
             // Physics
             _rb.AddForce(MoveDirection * _startSpeed * Time.fixedDeltaTime, ForceMode2D.Force);
 
@@ -59,7 +63,11 @@ namespace Game
             OldVelocity = _rb.velocity;
         }
 
-        public void Move(Vector2 direction) => MoveDirection = direction.normalized;
+        public void Move(Vector2 direction) {
+            IcommandMovement storedCommand = new EntityMovementCommand(this);
+            MoveDirection=invoker.AddCommand(direction, storedCommand);
+            //MoveDirection = storedCommand.Execute(direction);
+        }
         public void MoveToward(Transform target) => MoveDirection = (target.position - _rb.transform.position).normalized;
 
         public void AlterSpeed(float factor)
