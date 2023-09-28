@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8162311861187777747}
   - component: {fileID: 4334918836429385943}
   - component: {fileID: 889165137502490132}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_returnToPool: {fileID: -6157257926419923169}
   m_objectPool: {fileID: 8162311861187777747}
+  m_rigidbody2D: {fileID: 4334918836429385943}
 --- !u!114 &-6157257926419923169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5072428983941598852}
   - component: {fileID: 48567426802936660}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

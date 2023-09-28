@@ -14,12 +14,16 @@ namespace Game
 	    public ObjectPool ObjectPool => m_objectPool;
 		[SerializeField] private ObjectPool m_objectPool;
 
+		public Rigidbody2D Rigidbody2D => Rigidbody2D;
+		[SerializeField] private Rigidbody2D m_rigidbody2D;
 
-        // Just for test 
-        void Update()
-        {
-			transform.position += Vector3.up * Time.deltaTime;
-        }
+		public void Init(Vector2 _posToSpawn, Vector2 _dir, float _speed, Quaternion? _rotation = null)
+		{
+			this.transform.position = _posToSpawn;
+			this.transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(_dir, Vector2.up));
+
+			m_rigidbody2D.AddForce(_dir.normalized * _speed);
+		}
 
 		void OnCollisionEnter2D ( Collision2D _collision )
 		{

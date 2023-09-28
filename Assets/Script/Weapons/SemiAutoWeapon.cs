@@ -10,9 +10,7 @@ namespace Game.Weapon
     {
         [SerializeField, BoxGroup("Semi Weapon Spec")] private float _shotTime;
 
-        //[SerializeField] private IPool pool;
-        // pool of bullet
-
+        [SerializeField] private ObjectPool _bulletPool;
 
         [SerializeField, Foldout("Event")] private UnityEvent _onShoot;
         [SerializeField, Foldout("Event")] private UnityEvent _onTriggerRelease;
@@ -36,11 +34,10 @@ namespace Game.Weapon
 
         private void InstanceBullet()
         {
-            // Instanciate bullet from pool
-            // Move Bullet to fire point
-            // Orient Bullet to Weapon Direction
+            Bullet bullet = _bulletPool.Pool.Get();
+            bullet.Init(_firePoint.transform.position, Direction, 300);
 
-            if (--_currentMagSize <= 0)
+			if (--_currentMagSize <= 0)
                 StartCoroutine(ReloadWeapon());
         }
 
