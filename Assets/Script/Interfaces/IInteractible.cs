@@ -7,5 +7,6 @@ namespace Game
     public interface IInteractible
     {
         public void Interact();
+        public void StopInteract();
     }
 }
