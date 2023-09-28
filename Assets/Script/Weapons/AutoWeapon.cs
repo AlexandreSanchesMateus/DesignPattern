@@ -20,12 +20,16 @@ namespace Game.Weapon
 
         public override void PullTrigger()
         {
+            if (_isReloading) return;
+
             InvokeRepeating(nameof(InstanceBullet), 0F, _fireRate);
             _onStartShooting?.Invoke();
         }
 
         public override void ReleaseTrigger()
         {
+            if (_isReloading) return;
+
             CancelInvoke();
             _onStopChooting?.Invoke();
         }
@@ -37,7 +41,7 @@ namespace Game.Weapon
 
             if(--_currentMagSize <= 0)
             {
-                ReloadWeapon();
+                StartCoroutine(ReloadWeapon());
                 CancelInvoke();
             }
         }
