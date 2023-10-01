@@ -1,34 +1,63 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Windows.Input;
 using UnityEngine;
-
+using System.Linq;
+using System;
+using DG.Tweening;
+using UnityEngine.Rendering;
 namespace Game
 {
+    class RewindObjects
+    {
+        public GameObject gameObjectToRewind;
+        public Stack<IcommandMovement> _commandList = new Stack<IcommandMovement>();
+    }
+    [Serializable]
     public class MovecommandInvoker
     {
-        Stack<IcommandMovement> _commandList;
+        private List<RewindObjects> _objectsToRewind= new List<RewindObjects>();
         IcommandMovement _onCommand;
-
+        bool _canUndo= true;
         public MovecommandInvoker()
         {
-            _commandList = new Stack<IcommandMovement>();
+            //_commandList = new Stack<IcommandMovement>();
         }
 
-        public Vector2 AddCommand(Vector2 pos,IcommandMovement newCommand)
-        {
-            _commandList.Push(newCommand);
-            return newCommand.Execute(pos);
-        }
-        public Vector3 UndoCommand()
+        public void AddCommand(GameObject objectToSave, IcommandMovement newCommand)
         {
 
-            if (_commandList.Count > 0)
+            _objectsToRewind.First( x => x.gameObjectToRewind)
+                ._commandList.Push(newCommand);
+            newCommand.Execute(objectToSave.transform.position);
+            Debug.Log("addlist");
+            //return;
+        }
+        public void UndoCommand()
+        {
+
+            foreach (var item in _objectsToRewind)
             {
-                IcommandMovement lastesCommand = _commandList.Pop();
-                return lastesCommand.Undo();
+
+                if (item._commandList.Count > 0)
+                {
+                    if (_canUndo)
+                    {
+                        _canUndo = false;
+                        IcommandMovement lastesCommand = item._commandList.Pop();
+                        item.gameObjectToRewind.transform.DOMove(lastesCommand.Undo(), 0.15f).SetEase(Ease.Flash).OnComplete(() => _canUndo = true);
+                        Debug.Log(item._commandList.Count);
+                        Debug.Log("undo");
+                    }
+                    //item.gameObjectToRewind.transform.position = lastesCommand.Undo();
+                    //return lastesCommand.Undo();
+                }
             }
-            return Vector3.zero;
+            //return Vector3.zero;
+        }
+        public void AddObjectToRewind(GameObject objectToAdd)
+        {
+            RewindObjects newRewindObject = new RewindObjects();
+            newRewindObject.gameObjectToRewind = objectToAdd;
+            _objectsToRewind.Add(newRewindObject);
         }
     }
 }

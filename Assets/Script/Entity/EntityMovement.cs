@@ -1,17 +1,17 @@
 using NaughtyAttributes;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 namespace Game
 {
     public class EntityMovement : MonoBehaviour
     {
         [SerializeField, BoxGroup("Dependencies")] Rigidbody2D _rb;
-
         [SerializeField, BoxGroup("Configuration")] float _startSpeed;
-
+        [SerializeField, BoxGroup("Configuration")] GameObject trail;
+        [SerializeField, BoxGroup("Configuration")] private GameObject volume;
+        
         #region Events
         [SerializeField, Foldout("Event")] UnityEvent _onStartWalking;
         [SerializeField, Foldout("Event")] UnityEvent _onContinueWalking;
@@ -40,6 +40,7 @@ namespace Game
         private void Awake()
         {
             invoker = new MovecommandInvoker();
+            invoker.AddObjectToRewind(transform.parent.gameObject);
             CurrentSpeed = new Alterable<float>(_startSpeed);
 
         }
@@ -56,8 +57,16 @@ namespace Game
 
             if (Input.GetKey(KeyCode.Space))
             {
-                transform.parent.transform.position = invoker.UndoCommand();
-                Time.timeScale = 0.1f;
+                invoker.UndoCommand();
+                trail.SetActive(true);
+                //trail.GetComponent<Vol>
+                volume.SetActive(true);
+                //Time.timeScale = 0.1f;
+            }
+            else
+            {
+                trail.SetActive(false);
+                volume.SetActive(false);
             }
             // Physics
             _rb.AddForce(MoveDirection * _startSpeed * Time.fixedDeltaTime, ForceMode2D.Force);
@@ -67,10 +76,14 @@ namespace Game
         }
 
         public void Move(Vector2 direction) {
-            IcommandMovement storedCommand = new EntityMovementCommand(this);
+            if (direction != Vector2.zero)
+            {
+                IcommandMovement storedCommand = new EntityMovementCommand(this, transform.position);
+                invoker.AddCommand(transform.parent.gameObject, storedCommand);
+            }
             MoveDirection = direction.normalized;
-            invoker.AddCommand(transform.position, storedCommand);
-            Time.timeScale = 1f;
+            
+            //Time.timeScale = 1f;
             //MoveDirection = storedCommand.Execute(direction);
         }
         public void MoveToward(Transform target) => MoveDirection = (target.position - _rb.transform.position).normalized;
