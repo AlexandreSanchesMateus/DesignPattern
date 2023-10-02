@@ -12,21 +12,22 @@ namespace Game
 	// This example spans a random number of Bullets using a pool so that old systems can be reused.
 	public class ObjectPool<T> : MonoBehaviour where T : Component
 	{
-		[SerializeField, Required] private T m_prefabToSpawn;
-		
-		public enum PoolType
+		[SerializeField, Required] protected T m_prefabToSpawn;
+
+		[SerializeField]
+		private enum PoolType
 		{
 			Stack,
 			LinkedList
 		}
 
-		public PoolType poolType;
+		[SerializeField] private PoolType poolType;
 
 		// Collection checks will throw errors if we try to release an item that is already in the pool.
-		public bool collectionChecks = true;
-		public int maxPoolSize = 10;
+		[SerializeField] private bool collectionChecks = true;
+		[SerializeField] private int maxPoolSize = 10;
 
-		private IObjectPool<T> m_pool;
+		protected IObjectPool<T> m_pool;
 
 		public IObjectPool<T> Pool
 		{
