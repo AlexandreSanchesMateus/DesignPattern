@@ -174,6 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movement: {fileID: 6445811766320157846}
+  _weaponInteraction: {fileID: 0}
+  _aim: {fileID: 0}
   _moveInput:
     m_UseReference: 1
     m_Action:
@@ -186,13 +188,85 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -8525991464969775083, guid: 55e29d63565f40741bca45a1cf06460e, type: 3}
-  _attackInput:
+  _aimPositionInput:
     m_UseReference: 1
     m_Action:
-      m_Name: Attack Input
+      m_Name: Aim Position Input
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: ce0a1200-0da2-4993-907b-f85b4f2a3ba5
+      m_Id: 728fc23c-a1b2-4ced-9edc-cd7ddc6d432c
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -2057929545544530715, guid: 55e29d63565f40741bca45a1cf06460e, type: 3}
+  _aimDirectionInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Aim Direction Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 13b7ccef-72d0-4b2e-9065-b673a642283e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -8330256943044094696, guid: 55e29d63565f40741bca45a1cf06460e, type: 3}
+  _shootInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Shoot Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 20961cec-f3ac-4f35-97d4-72c03dfa451f
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 972819839363696551, guid: 55e29d63565f40741bca45a1cf06460e, type: 3}
+  _reloadInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Reload Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 8b6239ab-a4d8-4833-9395-6ebc788273e1
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -7436536095504139581, guid: 55e29d63565f40741bca45a1cf06460e, type: 3}
+  _dropInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Drop Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: fce3b8bf-df4b-418b-8e2e-951d1a200df8
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -3200883830423740347, guid: 55e29d63565f40741bca45a1cf06460e, type: 3}
+  _throwInput:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Throw Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 14828fc9-700c-44ac-b102-e5286f6e137d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 5333778715899742754, guid: 55e29d63565f40741bca45a1cf06460e, type: 3}
+  _rewindInput:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Rewind Input
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 9eb9a791-da25-463c-bb63-60446e3e306e
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
@@ -424,7 +498,55 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 614539736087202569, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4926425620692954407}
+    - targetCorrespondingSourceObject: {fileID: 7434393736975374266, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5946381072599964535}
+    - targetCorrespondingSourceObject: {fileID: 7434393736975374266, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 209407667670213429}
   m_SourcePrefab: {fileID: 100100000, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
+--- !u!1 &1591173446505382873 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7434393736975374266, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
+  m_PrefabInstance: {fileID: 8158480075683173475}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5946381072599964535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591173446505382873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 217f0d9b348e751408ae60ebf3018051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponInteraction: {fileID: 0}
+  _renderAimPosition: {fileID: 0}
+  _pivotAimDirection: {fileID: 0}
+--- !u!114 &209407667670213429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591173446505382873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ff442ed0e034ec42a4f2d3f7649c843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _handPosition: {fileID: 0}
+  _onWeaponOver:
+    m_PersistentCalls:
+      m_Calls: []
+  _onWeaponExit:
+    m_PersistentCalls:
+      m_Calls: []
+  _onChangeWeapon:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &2349297346374642035 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5882509366201892112, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
@@ -435,7 +557,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2903873710831780085, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
   m_PrefabInstance: {fileID: 8158480075683173475}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1591173446505382873}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 685852af2a366a54598988e7d05ace90, type: 3}
