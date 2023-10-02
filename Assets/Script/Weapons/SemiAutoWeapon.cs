@@ -10,9 +10,7 @@ namespace Game.Weapon
     {
         [SerializeField, BoxGroup("Semi Weapon Spec")] private float _shotTime;
 
-        //[SerializeField] private IPool pool;
-        // pool of bullet
-
+        [SerializeField] private ObjectPool _bulletPool;
 
         [SerializeField, Foldout("Event")] private UnityEvent _onShoot;
         [SerializeField, Foldout("Event")] private UnityEvent _onTriggerRelease;
@@ -21,7 +19,7 @@ namespace Game.Weapon
 
         public override void PullTrigger()
         {
-            if (_isBetweenShot) return;
+            if (_isBetweenShot || _isReloading) return;
 
             InstanceBullet();
             StartCoroutine(ShotDelay());
@@ -29,20 +27,18 @@ namespace Game.Weapon
 
         public override void ReleaseTrigger()
         {
+            if (_isBetweenShot) return;
+
             _onTriggerRelease?.Invoke();
         }
 
         private void InstanceBullet()
         {
-            // Instanciate bullet from pool
-            // Move Bullet to fire point
-            // Orient Bullet to Weapon Direction
+            Bullet bullet = _bulletPool.Pool.Get();
+            bullet.Init(_firePoint.transform.position, Direction, 300);
 
-            if (--_currentMagSize <= 0)
-            {
-                ReloadWeapon();
-                CancelInvoke();
-            }
+			if (--_currentMagSize <= 0)
+                StartCoroutine(ReloadWeapon());
         }
 
         private IEnumerator ShotDelay()
