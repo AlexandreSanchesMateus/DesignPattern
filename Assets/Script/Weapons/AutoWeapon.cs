@@ -11,7 +11,7 @@ namespace Game.Weapon
         [SerializeField, BoxGroup("Auto Weapon Spec")] private float _fireRate;
 
 		// pool of bullet
-		[SerializeField] private ObjectPool _bulletPool;
+		[SerializeField] private ObjectPool<Bullet> _bulletPool;
 
 		[SerializeField, Foldout("Event")] private UnityEvent _onStartShooting;
         [SerializeField, Foldout("Event")] private UnityEvent _onContinueShooting;
@@ -39,8 +39,9 @@ namespace Game.Weapon
         {
 			Bullet bullet = _bulletPool.Pool.Get();
             bullet.Init(_firePoint.transform.position, Direction, 300);
+            bullet.onBulletHit += () => bullet.ObjectPool.Pool.Release(bullet);
 
-			_onContinueShooting?.Invoke();
+            _onContinueShooting?.Invoke();
 
             if(--_currentMagSize <= 0)
             {

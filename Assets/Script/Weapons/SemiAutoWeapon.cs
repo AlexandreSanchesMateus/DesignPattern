@@ -10,7 +10,7 @@ namespace Game.Weapon
     {
         [SerializeField, BoxGroup("Semi Weapon Spec")] private float _shotTime;
 
-        [SerializeField] private ObjectPool _bulletPool;
+        [SerializeField] private ObjectPool<Bullet> _bulletPool;
 
         [SerializeField, Foldout("Event")] private UnityEvent _onShoot;
         [SerializeField, Foldout("Event")] private UnityEvent _onTriggerRelease;
@@ -36,8 +36,9 @@ namespace Game.Weapon
         {
             Bullet bullet = _bulletPool.Pool.Get();
             bullet.Init(_firePoint.transform.position, Direction, 300);
+            bullet.onBulletHit += () => bullet.ObjectPool.Pool.Release(bullet);
 
-			if (--_currentMagSize <= 0)
+            if (--_currentMagSize <= 0)
                 StartCoroutine(ReloadWeapon());
         }
 
