@@ -8,9 +8,9 @@ namespace Game
     {
 	    public event Action onBulletHit;
 
-		/*public ReturnToPool ReturnToPool => m_returnToPool;
+		public ReturnToPool ReturnToPool => m_returnToPool;
 	    [SerializeField] private ReturnToPool m_returnToPool;
-		*/
+		
 		public ObjectPool<Bullet> ObjectPool => m_objectPool;
 		[SerializeField] private ObjectPool<Bullet> m_objectPool;
 

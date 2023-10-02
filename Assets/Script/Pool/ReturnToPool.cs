@@ -15,7 +15,7 @@ namespace Game
 			bullet = GetComponent<Game.Bullet>();
 
 			// Return to the pool
-			//bullet.onBulletHit += () => pool.Release(bullet);
+			bullet.onBulletHit += () => pool.Release(bullet);
 		}
 	}
 }

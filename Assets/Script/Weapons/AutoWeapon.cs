@@ -39,7 +39,7 @@ namespace Game.Weapon
         {
 			Bullet bullet = _bulletPool.Pool.Get();
             bullet.Init(_firePoint.transform.position, Direction, 300);
-            bullet.onBulletHit += () => bullet.ObjectPool.Pool.Release(bullet);
+            //bullet.onBulletHit += () => bullet.ObjectPool.Pool.Release(bullet);
 
             _onContinueShooting?.Invoke();
 

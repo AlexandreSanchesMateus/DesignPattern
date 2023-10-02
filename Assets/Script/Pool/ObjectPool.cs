@@ -24,8 +24,11 @@ namespace Game
 		[SerializeField] private PoolType poolType;
 
 		// Collection checks will throw errors if we try to release an item that is already in the pool.
-		[SerializeField] private bool collectionChecks = true;
-		[SerializeField] private int maxPoolSize = 10;
+		[SerializeField] private bool m_collectionChecks = true;
+		[SerializeField] private int m_defaultPoolSize = 10;
+		[SerializeField] private int m_maxPoolSize = 10;
+
+		private Transform m_bulletHolder;
 
 		protected IObjectPool<T> m_pool;
 
@@ -35,18 +38,22 @@ namespace Game
 			{
 				if (m_pool == null)
 				{
+					m_bulletHolder = new GameObject("Bullet Holder").transform;
+
 					if (poolType == PoolType.Stack)
+					{
 						m_pool = new UnityEngine.Pool.ObjectPool<T>(
 							CreatePooledItem,
 							OnTakeFromPool,
 							OnReturnedToPool,
-							OnDestroyPoolObject, collectionChecks, 10, maxPoolSize);
+							OnDestroyPoolObject, m_collectionChecks, m_defaultPoolSize, m_maxPoolSize);
+					}
 					else
 						m_pool = new LinkedPool<T>(
 							CreatePooledItem,
 							OnTakeFromPool,
 							OnReturnedToPool,
-							OnDestroyPoolObject, collectionChecks, maxPoolSize);
+							OnDestroyPoolObject, m_collectionChecks, m_maxPoolSize);
 				}
 				return m_pool;
 			}
@@ -54,9 +61,15 @@ namespace Game
 
 		private T CreatePooledItem ()
 		{
-			T bullet = Instantiate (m_prefabToSpawn);
+			T bullet = Instantiate (m_prefabToSpawn, m_bulletHolder);
 
 			// This is used to return Bullets to the pool when they have stopped.
+
+			if (bullet.TryGetComponent(out Bullet _bullet))
+			{
+				_bullet.ReturnToPool.pool = Pool as IObjectPool<Bullet>;
+			}
+
 			//bullet.ReturnToPool.pool = Pool;
 
 			return bullet;
@@ -81,7 +94,7 @@ namespace Game
 			Destroy(_system.gameObject);
 		}
 
-		void OnGUI ()
+		/*void OnGUI ()
 		{
 			GUILayout.Label("Pool size: " + Pool.CountInactive);
 			if (GUILayout.Button("Create Particles"))
@@ -94,6 +107,6 @@ namespace Game
 					//ps.Play();
 				}
 			}
-		}
+		}*/
 	}
 }

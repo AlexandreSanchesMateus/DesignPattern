@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4334918836429385943}
   - component: {fileID: 889165137502490132}
   m_Layer: 8
-  m_Name: Bullet
+  m_Name: Bullet_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ea226b380af5a49901ab8ac2c571db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_returnToPool: {fileID: -6157257926419923169}
   m_objectPool: {fileID: 8162311861187777747}
   m_rigidbody2D: {fileID: 4334918836429385943}
 --- !u!114 &-6157257926419923169
@@ -63,6 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: facb6912d0a258044bc8ee5b119be441, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: -4053695573104873344}
 --- !u!114 &8162311861187777747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,8 +79,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_prefabToSpawn: {fileID: -4053695573104873344}
   poolType: 0
-  collectionChecks: 1
-  maxPoolSize: 10
+  m_collectionChecks: 1
+  m_defaultPoolSize: 2
+  m_maxPoolSize: 4
 --- !u!50 &4334918836429385943
 Rigidbody2D:
   serializedVersion: 4
