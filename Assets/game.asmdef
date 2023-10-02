@@ -6,7 +6,9 @@
         "RedStudio.SerializableCallback",
         "NaughtyAttributes.Core",
         "Cinemachine",
-        "UnityEngine.Advertisements"
+        "UnityEngine.Advertisements",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Core.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

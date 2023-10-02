@@ -1,3 +1,4 @@
+using DG.Tweening;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,7 +11,7 @@ namespace Game
         [SerializeField, BoxGroup("Dependencies")] Rigidbody2D _rb;
         [SerializeField, BoxGroup("Configuration")] float _startSpeed;
         [SerializeField, BoxGroup("Configuration")] GameObject trail;
-        [SerializeField, BoxGroup("Configuration")] private GameObject volume;
+        [SerializeField, BoxGroup("Configuration")] private Volume volume;
         
         #region Events
         [SerializeField, Foldout("Event")] UnityEvent _onStartWalking;
@@ -60,13 +61,13 @@ namespace Game
                 invoker.UndoCommand();
                 trail.SetActive(true);
                 //trail.GetComponent<Vol>
-                volume.SetActive(true);
+                DOTween.To(() => volume.weight, x => volume.weight = x, 1, 0.2f);
                 //Time.timeScale = 0.1f;
             }
             else
             {
                 trail.SetActive(false);
-                volume.SetActive(false);
+                DOTween.To(() => volume.weight, x => volume.weight = x, 0, 0.2f);
             }
             // Physics
             _rb.AddForce(MoveDirection * _startSpeed * Time.fixedDeltaTime, ForceMode2D.Force);
