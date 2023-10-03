@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Game.Weapon;
 using UnityEngine.Rendering;
+using DG.Tweening;
 
 namespace Game
 {
@@ -107,26 +108,27 @@ namespace Game
             // Rewind
             _rewindInput.action.performed -= RewindTime;
             _rewindInput.action.canceled -= StopRewindTime;
-            
         }
-
-
         private void UpdateMove(InputAction.CallbackContext obj) => _movement.Move(obj.ReadValue<Vector2>().normalized);
         private void StopMove(InputAction.CallbackContext obj) => _movement.Move(Vector2.zero);
-
         private void UseWeapon(InputAction.CallbackContext obj) => _weaponInteraction.UseWeapon(obj.performed);
         private void ReloadWeapon(InputAction.CallbackContext obj) => _weaponInteraction.ReloadWeapon();
-
         private void DropWeapon(InputAction.CallbackContext obj) => _weaponInteraction.DropWeapon();
         private void ThrowWeapon(InputAction.CallbackContext obj) => _weaponInteraction.ThrowWeapon();
-
         private void SetAimPosition(InputAction.CallbackContext obj) => _aim.SetAimPosition(obj.ReadValue<Vector2>());
         private void SetAimDirection(InputAction.CallbackContext obj) => _aim.SetAimDirection(obj.ReadValue<Vector2>().normalized);
 
-        private void RewindTime(InputAction.CallbackContext obj) => _command.UndoCommand(true);
-
-
-
-        private void StopRewindTime(InputAction.CallbackContext obj) => _command.UndoCommand(false);
+        private void RewindTime(InputAction.CallbackContext obj) 
+        {
+            DOTween.To(() => volume.weight, x => volume.weight = x, 1, 0.2f);
+            trail.SetActive(true);
+            _command.UndoCommand(true);
+        }
+        private void StopRewindTime(InputAction.CallbackContext obj) 
+        {
+            DOTween.To(() => volume.weight, x => volume.weight = x, 0, 0.2f);
+            trail.SetActive(false);
+            _command.UndoCommand(false); 
+        }
     }
 }
