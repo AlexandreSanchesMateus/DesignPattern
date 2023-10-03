@@ -8,14 +8,14 @@ namespace Game
         EntityMovement _entityMovement;
  
         Vector2 _pos;
-        public EntityMovementCommand(EntityMovement entityMovement,Vector2 pos )
+        public EntityMovementCommand(Vector2 pos)
         {
-            _entityMovement = entityMovement;
+            //_entityMovement = entityMovement;
             _pos = pos;
         }
         public Vector2 Execute(Vector2 position)
         {
-            Debug.Log("exe");
+            //Debug.Log("exe");
             return position;
         }
         public Vector3 Undo()

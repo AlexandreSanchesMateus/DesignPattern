@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Game.Weapon;
+using UnityEngine.Rendering;
 
 namespace Game
 {
@@ -36,7 +37,10 @@ namespace Game
         [SerializeField, BoxGroup("Dependencies")] EntityMovement _movement;
         [SerializeField, BoxGroup("Dependencies")] EntityWeaponInteraction _weaponInteraction;
         [SerializeField, BoxGroup("Dependencies")] EntityAim _aim;
-        // [SerializeField, BoxGroup("Dependencies")] EntityMovement _command;
+        [SerializeField, BoxGroup("Dependencies")] MovecommandInvoker _command;
+        [SerializeField, BoxGroup("Dependencies")] GameObject trail;
+        [SerializeField, BoxGroup("Dependencies")] private Volume volume;
+
 
         [SerializeField, BoxGroup("Input")] InputActionProperty _moveInput;
 
@@ -47,6 +51,8 @@ namespace Game
         [SerializeField, BoxGroup("Input")] InputActionProperty _reloadInput;
         [SerializeField, BoxGroup("Input")] InputActionProperty _dropInput;
         [SerializeField, BoxGroup("Input")] InputActionProperty _throwInput;
+
+        [SerializeField, BoxGroup("Input")] InputActionProperty _rewindInput;
 
         private void Start()
         {
@@ -69,6 +75,10 @@ namespace Game
 
             _aimPositionInput.action.started += SetAimPosition;
             _aimPositionInput.action.performed += SetAimPosition;
+
+            // rewind
+            _rewindInput.action.performed += RewindTime;
+            _rewindInput.action.canceled += StopRewindTime;
         }
 
         private void OnDestroy()
@@ -92,6 +102,12 @@ namespace Game
 
             _aimPositionInput.action.started -= SetAimPosition;
             _aimPositionInput.action.performed -= SetAimPosition;
+
+
+            // Rewind
+            _rewindInput.action.performed -= RewindTime;
+            _rewindInput.action.canceled -= StopRewindTime;
+            
         }
 
 
@@ -106,5 +122,11 @@ namespace Game
 
         private void SetAimPosition(InputAction.CallbackContext obj) => _aim.SetAimPosition(obj.ReadValue<Vector2>());
         private void SetAimDirection(InputAction.CallbackContext obj) => _aim.SetAimDirection(obj.ReadValue<Vector2>().normalized);
+
+        private void RewindTime(InputAction.CallbackContext obj) => _command.UndoCommand(true);
+
+
+
+        private void StopRewindTime(InputAction.CallbackContext obj) => _command.UndoCommand(false);
     }
 }
