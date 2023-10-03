@@ -4,9 +4,9 @@ using NaughtyAttributes;
 
 namespace Game
 {
-
-
-    public class Bullet : MonoBehaviour, IPoolableObject<Bullet>
+	[RequireComponent(typeof(ReturnBulletToPool))]
+	[RequireComponent(typeof(BulletPool))]
+	public class Bullet : MonoBehaviour, IPoolableObject<Bullet>
 	{
 	    public event Action onBulletHit;
 
@@ -32,12 +32,5 @@ namespace Game
 		{
 			onBulletHit?.Invoke();
 		}
-
-		
-	}
-	public interface IPoolableObject<T> where T : Component
-	{
-		//[SerializeField, Required] private ReturnBulletToPool m_returnToPool;
-		public ReturnToPool<T> ReturnToPool { get; }
 	}
 }

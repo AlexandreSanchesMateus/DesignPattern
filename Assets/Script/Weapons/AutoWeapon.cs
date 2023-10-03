@@ -10,7 +10,7 @@ namespace Game.Weapon
     {
         [SerializeField, BoxGroup("Auto Weapon Spec")] private float _fireRate;
 
-		// pool of bullet
+		// m_pool of bullet
 		[SerializeField] private BulletPool _bulletPool;
 
 		[SerializeField, Foldout("Event")] private UnityEvent _onStartShooting;

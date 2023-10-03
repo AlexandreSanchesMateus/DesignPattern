@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Game
 {
-    public class BulletPool : ObjectPool<Bullet>
+	[RequireComponent(typeof(ReturnBulletToPool))]
+	public class BulletPool : ObjectPool<Bullet>
     {
     }
 }

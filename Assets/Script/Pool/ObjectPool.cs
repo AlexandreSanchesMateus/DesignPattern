@@ -4,7 +4,7 @@ using NaughtyAttributes;
 
 namespace Game
 {
-	// This example spans a random number of Bullets using a pool so that old systems can be reused.
+	// This example spans a random number of Bullets using a m_pool so that old systems can be reused.
 	public class ObjectPool<T> : MonoBehaviour where T : Component, IPoolableObject<T>
 	{
 		[SerializeField, Required] protected T m_prefabToSpawn;
@@ -16,9 +16,9 @@ namespace Game
 			LinkedList
 		}
 
-		[SerializeField] private PoolType poolType;
+		[SerializeField] private PoolType m_poolType;
 
-		// Collection checks will throw errors if we try to release an item that is already in the pool.
+		// Collection checks will throw errors if we try to release an item that is already in the m_pool.
 		[SerializeField] private bool m_collectionChecks = true;
 		[SerializeField] private int m_defaultPoolSize = 10;
 		[SerializeField] private int m_maxPoolSize = 10;
@@ -35,7 +35,7 @@ namespace Game
 				{
 					m_bulletHolder = new GameObject("Bullet Holder").transform;
 
-					if (poolType == PoolType.Stack)
+					if (m_poolType == PoolType.Stack)
 					{
 						m_pool = new UnityEngine.Pool.ObjectPool<T>(
 							CreatePooledItem,
@@ -58,24 +58,24 @@ namespace Game
 		{
 			T bullet = Instantiate (m_prefabToSpawn, m_bulletHolder);
 
-			// This is used to return Bullets to the pool when they have stopped.
-			bullet.ReturnToPool.pool = Pool;
+			bullet.ReturnToPool.SetPoolObject(Pool);
+
 			return bullet;
 		}
 
-		// Called when an item is returned to the pool using Release
+		// Called when an item is returned to the m_pool using Release
 		private void OnReturnedToPool ( T _system )
 		{
 			_system.gameObject.SetActive(false);
 		}
 
-		// Called when an item is taken from the pool using Get
+		// Called when an item is taken from the m_pool using Get
 		private void OnTakeFromPool ( T _system )
 		{
 			_system.gameObject.SetActive(true);
 		}
 
-		// If the pool capacity is reached then any items returned will be destroyed.
+		// If the m_pool capacity is reached then any items returned will be destroyed.
 		// We can control what the destroy behavior does, here we destroy the GameObject.
 		private void OnDestroyPoolObject ( T _system )
 		{

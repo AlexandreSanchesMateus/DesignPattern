@@ -37,7 +37,7 @@ namespace Game.Weapon
         {
             Bullet bullet = _bulletPool.Pool.Get();
             bullet.Init(_firePoint.transform.position, Direction, 300);
-			//bullet.onBulletHit += () => bullet.ReturnToPool.pool.Release(bullet);
+			//bullet.onBulletHit += () => bullet.ReturnToPool.m_pool.Release(bullet);
 
 			/*Bullet bullet2 = _bulletPool2.Pool.Get();
 			bullet2.Init(_firePoint.transform.position, Direction, 200);
