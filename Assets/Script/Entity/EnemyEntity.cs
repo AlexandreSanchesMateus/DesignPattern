@@ -7,11 +7,10 @@ namespace Game
 {
     public class EnemyEntity : Entity, IPoolableObject<EnemyEntity>
     {
-		[Header("References")]
-		[SerializeField, Required] private ReturnEnemyToPool m_returnToPool;
-		public ReturnToPool<EnemyEntity> ReturnToPool => m_returnToPool;
+		[SerializeField, BoxGroup("References"), Required] private ReturnEnemyToPool m_returnToPool;
+		[SerializeField, BoxGroup("References"), Required] private EnemyPool m_enemyPool;
 
-		public EnemyPool BulletPool => m_enemyPool;
-		[SerializeField, Required] private EnemyPool m_enemyPool;
-	}
+		public ReturnToPool<EnemyEntity> ReturnToPool => m_returnToPool;
+		public EnemyPool EnnemyPool => m_enemyPool;
+    }
 }

@@ -9,10 +9,5 @@ namespace Game
     {
         [SerializeField, Required("nop")] protected Health _health;
         public Health Health => _health;
-
-		private void Update()
-        {
-
-        }
     }
 }

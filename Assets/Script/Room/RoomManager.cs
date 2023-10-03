@@ -11,9 +11,11 @@ namespace Game
     {
         [SerializeField, Foldout("Event")] UnityEvent _onRoomLock;
         [SerializeField, Foldout("Event")] UnityEvent _onRoomUnlock;
+        [SerializeField, Foldout("Event")] UnityEvent _onStageChange;
 
         public event UnityAction OnRoomLock { add => _onRoomLock.AddListener(value); remove => _onRoomLock.RemoveListener(value); }
         public event UnityAction OnRoomUnlock { add => _onRoomUnlock.AddListener(value); remove => _onRoomUnlock.RemoveListener(value); }
+        public event UnityAction OnStageChange { add => _onStageChange.AddListener(value); remove => _onStageChange.RemoveListener(value); }
 
         [Space(3)]
         [SerializeField, Tooltip("List of points delimiting the corners of the room. They must follow each other and clockwise.")] private Transform[] _roomBounds;
@@ -22,7 +24,10 @@ namespace Game
         [SerializeField] private EnemyPool[] _enemyPools;
         [SerializeField] private Wave[] _roomWaves;
 
-        // Triangulation
+
+        // ###################### Triangulation l'originale ###################### //
+        // Version 1.0                                                 par Alex SM //
+        
         private float _totalRoomArea;
         private Triangle[] _triangles;
 
@@ -44,14 +49,14 @@ namespace Game
         }
 
         [System.Serializable]
-        private struct EnemyType
+        private class EnemyType
         {
-            [Dropdown(nameof(GetPoolName))] public int _poolType;
+            [Dropdown(nameof(GetPoolName))] public int _poolIndex;
             public int _nbEnemies;
 
             [HideInInspector] public RoomManager _master;
 
-            private DropdownList<int> GetPoolName()
+            public DropdownList<int> GetPoolName()
             {
                 DropdownList<int> result = new();
                 bool isEmpty = true;
@@ -194,18 +199,14 @@ namespace Game
         private Vector2 GetRandomPositionInRoom()
         {
             float rng = Random.Range(0f, _totalRoomArea);
-            Debug.Log("RNG = " + rng + " sur total : " + _totalRoomArea);
 
             int index = 0;
             for (; index < _triangles.Length - 1; ++index)
             {
                 float trArea = _triangles[index].TriangleArea();
 
-                Debug.Log(trArea);
-
                 if (rng < trArea)
                 {
-                    Debug.Log("Break");
                     break;
                 }
 
@@ -217,6 +218,7 @@ namespace Game
 
         public void LockRoom()
         {
+            _onRoomLock?.Invoke();
             StartNextWave();
         }
 
@@ -234,7 +236,7 @@ namespace Game
                 {
                     for (int i = 0; i < ennemies._nbEnemies; i++)
                     {
-                        GameObject instance = _enemyPools[ennemies._poolType].Pool.Get().gameObject;
+                        GameObject instance = _enemyPools[ennemies._poolIndex].Pool.Get().gameObject;
                         // Set ennemi manager
                         instance.transform.position = GetRandomPositionInRoom();
                     }

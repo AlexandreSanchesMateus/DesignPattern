@@ -22,16 +22,11 @@ namespace Game
             {
                 _inZone.Add(h);
             }
-            else
-            {
-
-            }
-
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.TryGetComponent<IHealth>(out var h))
+            if (collision.TryGetComponent<IHealth>(out IHealth h))
             {
                 _inZone.Remove(h);
             }
