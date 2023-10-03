@@ -10,8 +10,7 @@ namespace Game
     {
         [SerializeField, BoxGroup("Dependencies")] Rigidbody2D _rb;
         [SerializeField, BoxGroup("Configuration")] float _startSpeed;
-        [SerializeField, BoxGroup("Dependencies")] GameObject trail;
-        [SerializeField, BoxGroup("Dependencies")] private Volume volume;
+
         [SerializeField, BoxGroup("Dependencies")] private MovecommandInvoker _invoker;
         #region Events
         [SerializeField, Foldout("Event")] UnityEvent _onStartWalking;
@@ -84,8 +83,8 @@ namespace Game
         public void Move(Vector2 direction) {
             if (direction != Vector2.zero)
             {
-                IcommandMovement storedCommand = new EntityMovementCommand(this, transform.position);
-                _invoker.AddCommand(transform.parent.gameObject, storedCommand);
+                
+                _invoker.AddCommand();
             }
             MoveDirection = direction.normalized;
             

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Game.Weapon;
+using UnityEngine.Rendering;
 
 namespace Game
 {
@@ -37,6 +38,9 @@ namespace Game
         [SerializeField, BoxGroup("Dependencies")] EntityWeaponInteraction _weaponInteraction;
         [SerializeField, BoxGroup("Dependencies")] EntityAim _aim;
         [SerializeField, BoxGroup("Dependencies")] MovecommandInvoker _command;
+        [SerializeField, BoxGroup("Dependencies")] GameObject trail;
+        [SerializeField, BoxGroup("Dependencies")] private Volume volume;
+
 
         [SerializeField, BoxGroup("Input")] InputActionProperty _moveInput;
 

@@ -32,13 +32,20 @@ namespace Game
             else
                 Destroy(gameObject);
         }
-        public void AddCommand(GameObject objectToSave, IcommandMovement newCommand)
+        public void AddCommand()
         {
+            foreach (RewindObjects item in _objectsToRewind)
+            {
+                //item.gameObjectToRewind;
 
-            _objectsToRewind.First( x => x.gameObjectToRewind== objectToSave)
-                ._commandList.Push(newCommand);
-            newCommand.Execute(objectToSave.transform.position);
-            Debug.Log("addlist");
+                IcommandMovement storedCommand = new EntityMovementCommand(item.gameObjectToRewind.transform.position);
+                //Debug.Log("RECORDING" + item.gameObjectToRewind.name + item._commandList.Count+ item.gameObjectToRewind.transform.position);
+                item._commandList.Push(storedCommand);
+
+                //item._commandList.Push(storedCommand);
+                storedCommand.Execute(item.gameObjectToRewind.transform.position);
+            }
+            //Debug.Log("addlist");
             //return;
         }
 
@@ -51,50 +58,36 @@ namespace Game
             IEnumerator RewindCouro()
             {
                 yield return new WaitForSeconds(0.1f);
-                foreach (var item in _objectsToRewind)
-                {
-                    Debug.Log("rewinding" + item.gameObjectToRewind.name+ item._commandList.Count);
-                    if (item._commandList.Count > 0)
+                if (_canUndo)
+                    foreach (var item in _objectsToRewind)
                     {
-                        if (_canUndo)
+                        Debug.Log("rewinding" + item.gameObjectToRewind.name+ item._commandList.Count);
+                    
+                    
+                        if (item._commandList.Count > 0)
                         {
                             _canUndo = false;
                             IcommandMovement lastesCommand = item._commandList.Pop();
-                            item.gameObjectToRewind.transform.DOMove(lastesCommand.Undo(), 0.15f).SetEase(Ease.Flash).OnComplete(() => _canUndo = true);
+                            Sequence RewindSequence = DOTween.Sequence();
+                            RewindSequence.Append(item.gameObjectToRewind.transform.DOMove(lastesCommand.Undo(), 0.15f).SetEase(Ease.Flash)).OnComplete(() => _canUndo = true);
 
                         }
 
+                    
                     }
-                }
                 if(_isRewinding)
                     StartCoroutine(RewindCouro());
             }
         }
-        //public void UndoCommand()
-        //{
-            
-        //    foreach (var item in _objectsToRewind)
-        //    {
-
-        //        if (item._commandList.Count > 0)
-        //        {
-        //            if (_canUndo)
-        //            {
-        //                _canUndo = false;
-        //                IcommandMovement lastesCommand = item._commandList.Pop();
-        //                item.gameObjectToRewind.transform.DOMove(lastesCommand.Undo(), 0.15f).SetEase(Ease.Flash).OnComplete(() => _canUndo = true);
-
-        //            }
-
-        //        }
-        //    }
-        //    //return Vector3.zero;
-        //}
         public void AddObjectToRewind(GameObject objectToAdd)
         {
             RewindObjects newRewindObject = new RewindObjects();
             newRewindObject.gameObjectToRewind = objectToAdd;
             _objectsToRewind.Add(newRewindObject);
+        }
+        public void DeleteFromRewind(GameObject objectToAdd)
+        {
+            _objectsToRewind.Remove(_objectsToRewind.First(x => x.gameObjectToRewind == objectToAdd));
         }
     }
 }
