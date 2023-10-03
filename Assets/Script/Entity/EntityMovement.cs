@@ -1,17 +1,17 @@
+using DG.Tweening;
 using NaughtyAttributes;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
 
 namespace Game
 {
     public class EntityMovement : MonoBehaviour
     {
         [SerializeField, BoxGroup("Dependencies")] Rigidbody2D _rb;
-
         [SerializeField, BoxGroup("Configuration")] float _startSpeed;
 
+        [SerializeField, BoxGroup("Dependencies")] private MovecommandInvoker _invoker;
         #region Events
         [SerializeField, Foldout("Event")] UnityEvent _onStartWalking;
         [SerializeField, Foldout("Event")] UnityEvent _onContinueWalking;
@@ -21,11 +21,12 @@ namespace Game
         public event UnityAction OnStopWalking { add => _onStopWalking.AddListener(value); remove => _onStopWalking.RemoveListener(value); }
         #endregion
 
-        Vector2 MoveDirection { get; set; }
+        public Vector2 MoveDirection { get; private set; }
         Vector2 OldVelocity { get; set; }
 
         public Alterable<float> CurrentSpeed { get; private set; }
 
+        
         #region EDITOR
 #if UNITY_EDITOR
         private void Reset()
@@ -38,11 +39,17 @@ namespace Game
 
         private void Awake()
         {
-
+            //invoker = new MovecommandInvoker();
+            
             CurrentSpeed = new Alterable<float>(_startSpeed);
 
         }
+        private void Start()
+        {
+            _invoker = MovecommandInvoker.instance;
 
+            _invoker.AddObjectToRewind(transform.parent.gameObject);
+        }
         private void FixedUpdate()
         {
             // FireEvents
@@ -52,6 +59,20 @@ namespace Game
                 _onStartWalking?.Invoke();
             else _onContinueWalking?.Invoke();
 
+
+            //if (Input.GetKey(KeyCode.Space))
+            //{
+            //    invoker.UndoCommand();
+            //    trail.SetActive(true);
+            //    //trail.GetComponent<Vol>
+            //    DOTween.To(() => volume.weight, x => volume.weight = x, 1, 0.2f);
+            //    //Time.timeScale = 0.1f;
+            //}
+            //else
+            //{
+            //    trail.SetActive(false);
+            //    DOTween.To(() => volume.weight, x => volume.weight = x, 0, 0.2f);
+            //}
             // Physics
             _rb.AddForce(MoveDirection * _startSpeed * Time.fixedDeltaTime, ForceMode2D.Force);
 
@@ -59,7 +80,17 @@ namespace Game
             OldVelocity = _rb.velocity;
         }
 
-        public void Move(Vector2 direction) => MoveDirection = direction.normalized;
+        public void Move(Vector2 direction) {
+            if (direction != Vector2.zero)
+            {
+                
+                _invoker.AddCommand();
+            }
+            MoveDirection = direction.normalized;
+            
+            //Time.timeScale = 1f;
+            //MoveDirection = storedCommand.Execute(direction);
+        }
         public void MoveToward(Transform target) => MoveDirection = (target.position - _rb.transform.position).normalized;
 
         public void AlterSpeed(float factor)
