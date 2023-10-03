@@ -19,7 +19,7 @@ namespace Game
         [SerializeField, Tooltip("List of points delimiting the corners of the room. They must follow each other and clockwise.")] private Transform[] _roomBounds;
         [Header("Wave Settings")]
         [Space(3)]
-        [SerializeField] private ObjectPool[] _enemyPools;
+        [SerializeField] private EnemyPool[] _enemyPools;
         [SerializeField] private Wave[] _roomWaves;
 
         // Triangulation

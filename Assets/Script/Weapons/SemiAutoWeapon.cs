@@ -11,7 +11,6 @@ namespace Game.Weapon
         [SerializeField, BoxGroup("Semi Weapon Spec")] private float _shotTime;
 
         [SerializeField] private BulletPool _bulletPool;
-        //[SerializeField] private ObjectPool<Bullet> _bulletPool2;
 
         [SerializeField, Foldout("Event")] private UnityEvent _onShoot;
         [SerializeField, Foldout("Event")] private UnityEvent _onTriggerRelease;
@@ -37,11 +36,6 @@ namespace Game.Weapon
         {
             Bullet bullet = _bulletPool.Pool.Get();
             bullet.Init(_firePoint.transform.position, Direction, 300);
-			//bullet.onBulletHit += () => bullet.ReturnToPool.m_pool.Release(bullet);
-
-			/*Bullet bullet2 = _bulletPool2.Pool.Get();
-			bullet2.Init(_firePoint.transform.position, Direction, 200);
-			bullet2.name = "bullet2";*/
 
 			if (--_currentMagSize <= 0)
                 StartCoroutine(ReloadWeapon());

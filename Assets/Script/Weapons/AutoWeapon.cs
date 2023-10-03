@@ -17,8 +17,6 @@ namespace Game.Weapon
         [SerializeField, Foldout("Event")] private UnityEvent _onContinueShooting;
         [SerializeField, Foldout("Event")] private UnityEvent _onStopChooting;
 
-        private bool _firstBullet;
-
         public override void PullTrigger()
         {
             if (_isReloading) return;
@@ -38,7 +36,7 @@ namespace Game.Weapon
         private void InstanceBullet()
         {
 			Bullet bullet = _bulletPool.Pool.Get();
-            bullet.Init(_firePoint.transform.position, Direction, 300);
+			bullet.Init(_firePoint.transform.position, Direction, 300);
             //bullet.onBulletHit += () => bullet.ObjectPool.Pool.Release(bullet);
 
             _onContinueShooting?.Invoke();
