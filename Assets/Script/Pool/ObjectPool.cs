@@ -4,13 +4,8 @@ using NaughtyAttributes;
 
 namespace Game
 {
-	public class BulletPool : ObjectPool<Bullet>
-	{
-
-	}
-
 	// This example spans a random number of Bullets using a pool so that old systems can be reused.
-	public class ObjectPool<T> : MonoBehaviour where T : Component
+	public class ObjectPool<T> : MonoBehaviour where T : Component, IPoolableObject<T>
 	{
 		[SerializeField, Required] protected T m_prefabToSpawn;
 
@@ -64,14 +59,7 @@ namespace Game
 			T bullet = Instantiate (m_prefabToSpawn, m_bulletHolder);
 
 			// This is used to return Bullets to the pool when they have stopped.
-
-			if (bullet.TryGetComponent(out Bullet _bullet))
-			{
-				_bullet.ReturnToPool.pool = Pool as IObjectPool<Bullet>;
-			}
-
-			//bullet.ReturnToPool.pool = Pool;
-
+			bullet.ReturnToPool.pool = Pool;
 			return bullet;
 		}
 
