@@ -2,7 +2,6 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Game.Weapon;
 
 namespace Game
 {
@@ -12,29 +11,78 @@ namespace Game
 
         [SerializeField, BoxGroup("Dependencies")] private EnemyEntity _root;
         [SerializeField, BoxGroup("Dependencies")] private EntityMovement _movement;
-        [SerializeField, BoxGroup("Dependencies")] private  EntityWeaponInteraction _weaponInteraction;
-
-        [SerializeField] private float _shootingTime;
-        [SerializeField] private float _aroundShootingTime;
+        [SerializeField, BoxGroup("Dependencies")] private IWeaponable _weapon;
 
         [SerializeField, BoxGroup("Conf")] private float _stopDistance;
-        [SerializeField, BoxGroup("Conf")] private float _attackRecover;
+        [SerializeField, BoxGroup("Conf")] private float _shootingTime;
+        [SerializeField, BoxGroup("Conf")] private float _aroundShootingTime;
 
         bool IsPlayerTooNear => Vector3.Distance(_root.transform.position, _playerEntity.Instance.transform.position) < _stopDistance;
 
+        private EAIStat _currentState;
+        private EAIStat _previousState;
+
+#if UNITY_EDITOR
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(_root.transform.position, _stopDistance);
+        }
+#endif
+
+        private enum EAIStat
+        {
+            MOVING,
+            SHOOTING
+        }
+
+        private void Start()
+        {
+            _currentState = EAIStat.MOVING;
+            _previousState = _currentState;
+        }
+
         private void Update()
         {
-            _weaponInteraction.SetWeaponOrientation((_playerEntity.Instance.transform.position - _root.transform.position).normalized);
+            switch (_currentState)
+            {
+                case EAIStat.MOVING:
+                    if (IsPlayerTooNear)
+                    {
+                        _currentState = EAIStat.SHOOTING;
+                        break;
+                    }
 
-            if (IsPlayerTooNear)
-            {
-                _movement.Move(Vector2.zero);
+                    _movement.MoveToward(_playerEntity.Instance.transform);
+                    break;
+
+                case EAIStat.SHOOTING:
+
+                    if (_previousState == _currentState) break;
+
+                    _previousState = _currentState;
+                    _movement.Move(Vector2.zero);
+                    StartCoroutine(Shooting());
+                    break;
             }
-            // Move To Player
-            else
+        }
+
+        private IEnumerator Shooting()
+        {
+            _weapon.PullTrigger();
+            float shootingTime = Random.Range(_shootingTime - _aroundShootingTime, _shootingTime + _aroundShootingTime);
+
+            while (shootingTime > 0)
             {
-                _movement.MoveToward(_playerEntity.Instance.transform);
+                shootingTime -= Time.deltaTime;
+                _weapon.SetOrientation((_playerEntity.Instance.transform.position - _root.transform.position).normalized);
+                yield return null;
             }
+
+            _weapon.ReleaseTrigger();
+            _weapon.Reload();
+            yield return new WaitForSeconds(2);
+            _currentState = EAIStat.MOVING;
         }
     }
 }
