@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game
 {
     [CreateAssetMenu(menuName = "CommandRef")]
-    public class CommandReference : Reference<Entity>
+    public class CommandReference : Reference<MovecommandInvoker>
     {
 
     }

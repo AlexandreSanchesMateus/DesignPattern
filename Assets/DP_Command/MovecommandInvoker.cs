@@ -16,21 +16,28 @@ namespace Game
     [Serializable]
     public class MovecommandInvoker:MonoBehaviour
     {
-        public static MovecommandInvoker instance = new MovecommandInvoker();
         private List<RewindObjects> _objectsToRewind= new List<RewindObjects>();
         IcommandMovement _onCommand;
         bool _canUndo= true;
-        bool _isRewinding;
-        //public MovecommandInvoker()
-        //{
-        //    //_commandList = new Stack<IcommandMovement>();
-        //}
-        private void Awake()
+        bool _isRewinding=false;
+
+        public void Start()
         {
-            if(instance==null)
-                instance= this;
-            else
-                Destroy(gameObject);
+            SaveCycle();
+        }
+        private void SaveCycle()
+        {
+            StartCoroutine(Cycle());
+            IEnumerator Cycle()
+            {
+                yield return new WaitForSeconds(0.3f);
+                if(!_isRewinding)
+                {
+                    Debug.Log("save");
+                    AddCommand();
+                }
+                StartCoroutine(Cycle());
+            }
         }
         public void AddCommand()
         {
@@ -69,7 +76,7 @@ namespace Game
                             _canUndo = false;
                             IcommandMovement lastesCommand = item._commandList.Pop();
                             Sequence RewindSequence = DOTween.Sequence();
-                            RewindSequence.Append(item.gameObjectToRewind.transform.DOMove(lastesCommand.Undo(), 0.15f).SetEase(Ease.Flash)).OnComplete(() => _canUndo = true);
+                            RewindSequence.Append(item.gameObjectToRewind.transform.DOMove(lastesCommand.Undo(), 0.1f).SetEase(Ease.Flash)).OnComplete(() => _canUndo = true);
 
                         }
 

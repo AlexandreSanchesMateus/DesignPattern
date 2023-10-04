@@ -11,7 +11,7 @@ namespace Game
         [SerializeField, BoxGroup("Dependencies")] Rigidbody2D _rb;
         [SerializeField, BoxGroup("Configuration")] float _startSpeed;
 
-        [SerializeField, BoxGroup("Dependencies")] private MovecommandInvoker _invoker;
+        //[SerializeField, BoxGroup("Dependencies")] private MovecommandInvoker _invoker;
         #region Events
         [SerializeField, Foldout("Event")] UnityEvent _onStartWalking;
         [SerializeField, Foldout("Event")] UnityEvent _onContinueWalking;
@@ -46,9 +46,9 @@ namespace Game
         }
         private void Start()
         {
-            _invoker = MovecommandInvoker.instance;
+            //_invoker = MovecommandInvoker.instance;
 
-            _invoker.AddObjectToRewind(transform.parent.gameObject);
+            //_invoker.AddObjectToRewind(transform.parent.gameObject);
         }
         private void FixedUpdate()
         {
@@ -84,7 +84,7 @@ namespace Game
             if (direction != Vector2.zero)
             {
                 
-                _invoker.AddCommand();
+                //_invoker.AddCommand();
             }
             MoveDirection = direction.normalized;
             
