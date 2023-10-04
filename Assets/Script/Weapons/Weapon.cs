@@ -76,7 +76,7 @@ namespace Game.Weapon
         public virtual void SetOrientation(Vector2 direction)
         {
             Direction = direction.normalized;
-            gameObject.transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(direction, Vector2.up));
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(direction, Vector2.right));
         }
         #endregion
 
