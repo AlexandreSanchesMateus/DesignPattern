@@ -12,10 +12,9 @@ namespace Game
         [SerializeField, BoxGroup("Dependencies"), Required] private Physics2DInteraction _trigger;
 
         [SerializeField] private GameObject _doorRender;
-        [SerializeField] private LayerMask _layer;
 
-        [SerializeField, Foldout("Event")] private UnityAction _onDoorClose;
-        [SerializeField, Foldout("Event")] private UnityAction _onDoorOpen;
+        [SerializeField, Foldout("Event")] private UnityEvent _onDoorClose;
+        [SerializeField, Foldout("Event")] private UnityEvent _onDoorOpen;
 
 
         private void Start()
@@ -37,10 +36,8 @@ namespace Game
 
         private void TriggerEnter(Collider2D other)
         {
-            if (other != null && other.gameObject.layer == _layer)
-            {
-                _manager.LockRoom();
-            }
+            Debug.Log("bite");
+            _manager.LockRoom();
         }
 
         public void CloseDoor()

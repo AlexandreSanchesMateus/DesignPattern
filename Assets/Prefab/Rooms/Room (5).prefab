@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6913942234378328548}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: (2)
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 6667862940619220813}
   - component: {fileID: 2499548909247090104}
   - component: {fileID: 8570062924972988557}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6187961403822381687}
   - component: {fileID: 7559949175220953208}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Doom (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,9 +210,12 @@ MonoBehaviour:
   _manager: {fileID: 4045409943433790667}
   _trigger: {fileID: 5458274534857015929}
   _doorRender: {fileID: 2326126986133822711}
-  _layer:
-    serializedVersion: 2
-    m_Bits: 64
+  _onDoorClose:
+    m_PersistentCalls:
+      m_Calls: []
+  _onDoorOpen:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4224800508884382731
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7148758945287273083}
   - component: {fileID: 4045409943433790667}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Room (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2823799551974220864}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: (3)
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -314,7 +317,7 @@ GameObject:
   - component: {fileID: 2552798325766536861}
   - component: {fileID: 34471551449367075}
   - component: {fileID: 5458274534857015929}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +417,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5838114120877470428}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: (1)
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -445,7 +448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7259810566438377794}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: (4)
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -476,7 +479,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3441032724895300547}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
