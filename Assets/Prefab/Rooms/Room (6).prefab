@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6831423392247125070}
   - component: {fileID: 5004956069075589291}
   - component: {fileID: 3131394137995873828}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Render
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5571935746905062}
   - component: {fileID: 7164304379897920172}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Doom (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7142212440286849069}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: (4)
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7309430817281753458}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: (1)
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 4032308478557423302}
   - component: {fileID: 6020961212908499785}
   - component: {fileID: 551198316477483510}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,6 +401,9 @@ MonoBehaviour:
   _onRoomUnlock:
     m_PersistentCalls:
       m_Calls: []
+  _onStageChange:
+    m_PersistentCalls:
+      m_Calls: []
   _roomBounds:
   - {fileID: 7309430817281753458}
   - {fileID: 5778815542285759931}
@@ -417,7 +420,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5186397295015315820}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,7 +455,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5778815542285759931}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: (2)
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -483,7 +486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 497795397618791437}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: (3)
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}

@@ -11,6 +11,7 @@ namespace Game.Weapon
         [SerializeField, BoxGroup("Set up")] protected Transform _firePoint;
         [SerializeField, BoxGroup("Set up")] protected Rigidbody2D _rb;
         [SerializeField, BoxGroup("Set up")] protected Collider2D _collider;
+        [SerializeField, BoxGroup("Set up")] protected Sprite _render;
 
         [SerializeField, BoxGroup("Commun")] protected int _magSize;
         [SerializeField, BoxGroup("Commun")] protected int _reloadTime;
@@ -77,6 +78,8 @@ namespace Game.Weapon
         {
             Direction = direction.normalized;
             gameObject.transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(direction, Vector2.right));
+
+            // Flip Render
         }
         #endregion
 

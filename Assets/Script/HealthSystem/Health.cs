@@ -10,7 +10,7 @@ namespace Game
 {
     public class Health : MonoBehaviour, IHealth
     {
-        [SerializeField] int _maxHealth;
+        [SerializeField] private int _maxHealth;
 
         /// <summary>
         /// coucou
@@ -20,7 +20,7 @@ namespace Game
             get;
             private set;
         }
-        public bool IsDead => CurrentHealth > 0;
+        public bool IsDead => CurrentHealth <= 0;
         public int MaxHealth { get => _maxHealth; }
 
         public event Action<int> OnDamage;
@@ -34,6 +34,9 @@ namespace Game
 
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
             OnDamage?.Invoke(amount);
+
+            if (IsDead)
+                InternalDie();
         }
         public void Regen(int amount)
         {
@@ -47,11 +50,10 @@ namespace Game
             InternalDie();
         }
 
-        public void Revive(int amount)
+        public void Revive(bool force=false)
         {
-            Assert.IsTrue(amount >= 0);
-            if (!IsDead) return;
-            InternalRegen(amount);
+            Debug.Log("REVIVE !");
+            CurrentHealth = _maxHealth;
         }
 
         void InternalRegen(int amount)
@@ -62,9 +64,10 @@ namespace Game
             CurrentHealth = Mathf.Min(_maxHealth, CurrentHealth + amount);
             OnRegen?.Invoke(CurrentHealth - old);
         }
+
         void InternalDie()
         {
-            if (!IsDead) return;
+            CurrentHealth = 0;
             OnDie?.Invoke();
         }
     }

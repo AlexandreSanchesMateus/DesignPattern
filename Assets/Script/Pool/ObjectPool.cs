@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 using NaughtyAttributes;
+using System;
 
 namespace Game
 {
@@ -23,6 +24,8 @@ namespace Game
 		[SerializeField] private int m_defaultPoolSize = 10;
 		[SerializeField] private int m_maxPoolSize = 10;
 
+		// public event Action OnTakeFromPool2;
+
 		private Transform m_bulletHolder;
 
 		protected IObjectPool<T> m_pool;
@@ -35,7 +38,7 @@ namespace Game
 				{
 					m_bulletHolder = new GameObject("Bullet Holder").transform;
 
-					if (m_poolType == PoolType.Stack)
+					//if (m_poolType == PoolType.Stack)
 					{
 						m_pool = new UnityEngine.Pool.ObjectPool<T>(
 							CreatePooledItem,
@@ -43,12 +46,12 @@ namespace Game
 							OnReturnedToPool,
 							OnDestroyPoolObject, m_collectionChecks, m_defaultPoolSize, m_maxPoolSize);
 					}
-					else
-						m_pool = new LinkedPool<T>(
-							CreatePooledItem,
-							OnTakeFromPool,
-							OnReturnedToPool,
-							OnDestroyPoolObject, m_collectionChecks, m_maxPoolSize);
+					//else
+					//	m_pool = new LinkedPool<T>(
+					//		CreatePooledItem,
+					//		OnTakeFromPool,
+					//		OnReturnedToPool,
+					//		OnDestroyPoolObject, m_collectionChecks, m_maxPoolSize);
 				}
 				return m_pool;
 			}
@@ -70,7 +73,7 @@ namespace Game
 		}
 
 		// Called when an item is taken from the m_pool using Get
-		private void OnTakeFromPool ( T _system )
+		protected virtual void OnTakeFromPool ( T _system )
 		{
 			_system.gameObject.SetActive(true);
 		}

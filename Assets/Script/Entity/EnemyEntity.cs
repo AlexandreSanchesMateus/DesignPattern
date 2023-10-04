@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Game
 {
@@ -12,5 +13,10 @@ namespace Game
 
 		public ReturnToPool<EnemyEntity> ReturnToPool => m_returnToPool;
 		public EnemyPool EnnemyPool => m_enemyPool;
+
+		public void DeathFeedBack(Action feedBack)
+        {
+            _health.OnDie += feedBack;
+        }
     }
 }
