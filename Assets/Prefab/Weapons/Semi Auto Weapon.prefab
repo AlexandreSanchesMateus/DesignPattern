@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Semi Auto Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 4778533088534170273, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -533325727, guid: 43cc566013a11864cb1dab2649c4e403, type: 3}
     - target: {fileID: 5704145355097060748, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
       propertyPath: _target
       value: 
@@ -56,6 +60,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8874547244046061070, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874547244046061070, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.029
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -64,6 +76,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -2475521916849117688}
   m_SourcePrefab: {fileID: 100100000, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+--- !u!198 &37247541523035120 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2539077721604314796, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+  m_PrefabInstance: {fileID: 2574029069958636892}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &545503434406873266 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2606121518571859438, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
@@ -102,11 +119,24 @@ MonoBehaviour:
   _onFinishReloading:
     m_PersistentCalls:
       m_Calls: []
+  m_model: {fileID: 4989110816799555933}
   _shotTime: 0.1
   _bulletPool: {fileID: 3958626959843017837, guid: f239b492212ea5b488049c7b1a77aa0a, type: 3}
   _onShoot:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 37247541523035120}
+        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onTriggerRelease:
     m_PersistentCalls:
       m_Calls: []
@@ -118,6 +148,11 @@ Rigidbody2D:
 --- !u!58 &4399168626238464541 stripped
 CircleCollider2D:
   m_CorrespondingSourceObject: {fileID: 2212451882810820417, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+  m_PrefabInstance: {fileID: 2574029069958636892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4989110816799555933 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7387073370594763777, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
   m_PrefabInstance: {fileID: 2574029069958636892}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6381724366297656146 stripped

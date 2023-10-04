@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bfc179708001a74cacf15f6fcd5a661, type: 3}
+  m_Name: Package
+  m_EditorClassIdentifier: 
+  descriptor:
+    packageId: pinpin.package.toonfx
+    packageName: Toon FX
+    packageDescription: Contains multiple toon FX prefabs and assets
+    version: 1.2
+    url: https://api.bitbucket.org/2.0/repositories/pinpinteam/pinpin-package-manager/src/master/ToonFX.unitypackage
+    imageName: 
+    tags:
+    - Graphic
+    - FX
+    - Particles
+    packageDependencies: []
+    packageExcluded: []
+    customDefineSymbols: []
+    texture: {fileID: 2800000, guid: 8c0e787759f59b94ba6c951a39682416, type: 3}
+    packageFunctionExecutions: []

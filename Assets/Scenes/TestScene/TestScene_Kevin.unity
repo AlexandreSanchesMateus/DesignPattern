@@ -880,6 +880,18 @@ PrefabInstance:
       propertyPath: _bulletPool
       value: 
       objectReference: {fileID: 3958626959843017837, guid: f239b492212ea5b488049c7b1a77aa0a, type: 3}
+    - target: {fileID: 7725402484320011976, guid: 54a44c188cd30a941802bfb35f773ba5, type: 3}
+      propertyPath: _onStartShooting.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7725402484320011976, guid: 54a44c188cd30a941802bfb35f773ba5, type: 3}
+      propertyPath: _onStartShooting.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7725402484320011976, guid: 54a44c188cd30a941802bfb35f773ba5, type: 3}
+      propertyPath: _onStartShooting.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8485972665882131874, guid: 54a44c188cd30a941802bfb35f773ba5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.1
@@ -978,7 +990,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d773979630cd0f345b26d67b7ac4fd5b, type: 2}
+  - {fileID: 2100000, guid: fb7811c91ff70fc41bc2511a00501279, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

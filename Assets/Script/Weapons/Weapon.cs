@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 
 namespace Game.Weapon
 {
@@ -28,6 +29,9 @@ namespace Game.Weapon
         protected bool _isReloading { get; private set;}
 
         protected Vector2 Direction { get; private set; }
+
+        [SerializeField] protected GameObject m_model;
+
 
         private void Start()
         {
@@ -84,6 +88,12 @@ namespace Game.Weapon
         {
             _onStartReloading?.Invoke();
             _isReloading = true;
+
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.Append(m_model.transform.DOLocalRotate(new Vector3(360, 360, 0), _reloadTime, RotateMode.FastBeyond360)
+                .SetRelative(true).SetEase(Ease.OutBack));
+
             yield return new WaitForSeconds(_reloadTime);
             _currentMagSize = _magSize;
             _isReloading = false;
