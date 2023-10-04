@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8688968313245849791}
   - component: {fileID: -4053695573104873344}
   - component: {fileID: 5104410147425661349}
-  - component: {fileID: 8162311861187777747}
+  - component: {fileID: 7555916163978466820}
   - component: {fileID: 4334918836429385943}
   - component: {fileID: 889165137502490132}
   m_Layer: 8
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_returnToPool: {fileID: 5104410147425661349}
-  m_bulletPool: {fileID: 8162311861187777747}
+  m_bulletPool: {fileID: 7555916163978466820}
   m_rigidbody2D: {fileID: 4334918836429385943}
 --- !u!114 &5104410147425661349
 MonoBehaviour:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_objectPool: {fileID: -4053695573104873344}
---- !u!114 &8162311861187777747
+--- !u!114 &7555916163978466820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,11 +74,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2060603631514971653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb7eb33eae47a5c40b1118f26a3b4c87, type: 3}
+  m_Script: {fileID: 11500000, guid: acdbab9b06ed66f4e88b63928670bab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_prefabToSpawn: {fileID: -4053695573104873344}
-  poolType: 0
+  m_poolType: 0
   m_collectionChecks: 1
   m_defaultPoolSize: 10
   m_maxPoolSize: 10

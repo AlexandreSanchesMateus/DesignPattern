@@ -103,7 +103,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _shotTime: 0.1
-  _bulletPool: {fileID: 3419785643505862330, guid: f239b492212ea5b488049c7b1a77aa0a, type: 3}
+  _bulletPool: {fileID: 3958626959843017837, guid: f239b492212ea5b488049c7b1a77aa0a, type: 3}
   _onShoot:
     m_PersistentCalls:
       m_Calls: []

@@ -12,6 +12,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Auto Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 3145035400105658027, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.044
+      objectReference: {fileID: 0}
+    - target: {fileID: 3145035400105658027, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.093
+      objectReference: {fileID: 0}
+    - target: {fileID: 4206386629873037592, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 4778533088534170273, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -88984568, guid: 43cc566013a11864cb1dab2649c4e403, type: 3}
+    - target: {fileID: 4778533088534170273, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953647931485817589, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5704145355097060748, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
       propertyPath: _target
       value: 
@@ -55,6 +79,14 @@ PrefabInstance:
     - target: {fileID: 6232123032421128446, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874547244046061070, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.425
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874547244046061070, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.016
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -103,7 +135,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _fireRate: 0.5
-  _bulletPool: {fileID: 3419785643505862330, guid: f239b492212ea5b488049c7b1a77aa0a, type: 3}
+  _bulletPool: {fileID: 3958626959843017837, guid: f239b492212ea5b488049c7b1a77aa0a, type: 3}
   _onStartShooting:
     m_PersistentCalls:
       m_Calls: []
