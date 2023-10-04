@@ -36,7 +36,6 @@ namespace Game
 
         private void TriggerEnter(Collider2D other)
         {
-            Debug.Log("bite");
             _manager.LockRoom();
         }
 
