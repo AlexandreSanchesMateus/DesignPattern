@@ -33,5 +33,20 @@ namespace Game
 			_collision.gameObject.GetComponent<IHealth>()?.TakeDamage(10);
 			onBulletHit?.Invoke();
 		}
-	}
+
+        public void OnObjectGetFromPool()
+        {
+            
+        }
+
+        public void OnObjectReturnToPool()
+        {
+            
+        }
+
+        public void OnObjectCreatedForPool()
+        {
+            
+        }
+    }
 }

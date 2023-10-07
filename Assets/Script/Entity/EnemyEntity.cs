@@ -14,9 +14,24 @@ namespace Game
 		public ReturnToPool<EnemyEntity> ReturnToPool => m_returnToPool;
 		public EnemyPool EnnemyPool => m_enemyPool;
 
-		public void DeathFeedBack(Action feedBack)
+        public void DeathFeedBack(Action feedBack)
         {
             _health.OnDie += feedBack;
+        }
+
+        public void OnObjectCreatedForPool()
+        {
+            
+        }
+
+        public void OnObjectGetFromPool()
+        {
+            _health.Revive();
+        }
+
+        public void OnObjectReturnToPool()
+        {
+            
         }
     }
 }

@@ -50,7 +50,7 @@ namespace Game
             InternalDie();
         }
 
-        public void Revive(bool force=false)
+        public void Revive()
         {
             Debug.Log("REVIVE !");
             CurrentHealth = _maxHealth;

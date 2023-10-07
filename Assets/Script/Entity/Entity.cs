@@ -11,14 +11,15 @@ namespace Game
     {
         [SerializeField, Required("nop")] protected Health _health;
         [field:SerializeField]public CommandReference command { get; set; }
-        //protected MovecommandInvoker Invoker;
+ 
         public Health Health => _health;
-        private void Start()
+
+        private void OnEnable()
         {
             // Invoker = Command.Instance;
             command.Instance.AddObjectToRewind(gameObject);
-           
         }
+
         private void OnDisable()
         {
             command.Instance.DeleteFromRewind(gameObject);
