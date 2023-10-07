@@ -9,21 +9,21 @@ namespace Game.Weapon
     public abstract class Weapon : MonoBehaviour, IPickable, IWeaponable
     {
         [SerializeField, BoxGroup("Set up")] protected Transform _firePoint;
-        [SerializeField, BoxGroup("Set up")] protected Rigidbody2D _rb;
-        [SerializeField, BoxGroup("Set up")] protected Collider2D _collider;
-        [SerializeField, BoxGroup("Set up")] protected Sprite _render;
+        [SerializeField, BoxGroup("Set up")] private Rigidbody2D _rb;
+        [SerializeField, BoxGroup("Set up")] private Collider2D _collider;
+        [SerializeField, BoxGroup("Set up")] private SpriteRenderer _render;
 
-        [SerializeField, BoxGroup("Commun")] protected int _magSize;
-        [SerializeField, BoxGroup("Commun")] protected int _reloadTime;
-        [SerializeField, BoxGroup("Commun")] protected float _throwForce;
+        [SerializeField, BoxGroup("Commun")] private int _magSize;
+        [SerializeField, BoxGroup("Commun")] private int _reloadTime;
+        [SerializeField, BoxGroup("Commun")] private float _throwForce;
 
 
-        [SerializeField, Foldout("Event")] private UnityEvent _onPickUp;
-        [SerializeField, Foldout("Event")] private UnityEvent _onThrow;
-        [SerializeField, Foldout("Event")] private UnityEvent _onDrop;
+        [SerializeField, Foldout("Event")] protected UnityEvent _onPickUp;
+        [SerializeField, Foldout("Event")] protected UnityEvent _onThrow;
+        [SerializeField, Foldout("Event")] protected UnityEvent _onDrop;
 
-        [SerializeField, Foldout("Event")] private UnityEvent _onStartReloading;
-        [SerializeField, Foldout("Event")] private UnityEvent _onFinishReloading;
+        [SerializeField, Foldout("Event")] protected UnityEvent _onStartReloading;
+        [SerializeField, Foldout("Event")] protected UnityEvent _onFinishReloading;
 
         protected int _currentMagSize;
         protected bool _isReloading { get; private set;}
@@ -79,11 +79,15 @@ namespace Game.Weapon
             Direction = direction.normalized;
             gameObject.transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(direction, Vector2.right));
 
-            // Flip Render
+            // Update SpriteRenderer
+            if (Vector2.Dot(direction, Vector2.right) >= 0)
+                _render.flipY = false;
+            else
+                _render.flipY = true;
         }
         #endregion
 
-        protected IEnumerator ReloadWeapon()
+        protected virtual IEnumerator ReloadWeapon()
         {
             _onStartReloading?.Invoke();
             _isReloading = true;
