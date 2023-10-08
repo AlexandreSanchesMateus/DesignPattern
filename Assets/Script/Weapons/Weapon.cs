@@ -13,11 +13,11 @@ namespace Game.Weapon
         [SerializeField, BoxGroup("Set up")] private Rigidbody2D _rb;
         [SerializeField, BoxGroup("Set up")] private Collider2D _collider;
         [SerializeField, BoxGroup("Set up")] private SpriteRenderer _render;
+        [SerializeField, BoxGroup("Set up")] protected GameObject m_model;
 
         [SerializeField, BoxGroup("Commun")] private int _magSize;
         [SerializeField, BoxGroup("Commun")] private int _reloadTime;
         [SerializeField, BoxGroup("Commun")] private float _throwForce;
-
 
         [SerializeField, Foldout("Event")] protected UnityEvent _onPickUp;
         [SerializeField, Foldout("Event")] protected UnityEvent _onThrow;
@@ -31,18 +31,25 @@ namespace Game.Weapon
 
         protected Vector2 Direction { get; private set; }
 
-        [SerializeField] protected GameObject m_model;
+        private Tween _idleAnim;
+        private Vector3 _defaultScale;
+        private Tween _reloadAnim;
 
-
-        private void Start()
+		protected virtual void Start()
         {
             _currentMagSize = _magSize;
+
+            _defaultScale = this.transform.localScale;
+
+            WaitingPickup();
         }
 
         #region Interface IPickable
         public virtual void PickUp(Transform parent)
         {
-            _collider.enabled = false;
+	        KillTweenOnWeapon();
+
+			_collider.enabled = false;
             _rb.simulated = false;
             gameObject.transform.SetParent(parent);
             gameObject.transform.localPosition = Vector2.zero;
@@ -60,7 +67,9 @@ namespace Game.Weapon
 
             StopAllCoroutines();
             CancelInvoke();
-        }
+
+            WaitingPickup();
+		}
 
         public void Throw()
         {
@@ -96,15 +105,30 @@ namespace Game.Weapon
             _onStartReloading?.Invoke();
             _isReloading = true;
 
-            Sequence sequence = DOTween.Sequence();
-
-            sequence.Append(m_model.transform.DOLocalRotate(new Vector3(360, 360, 0), _reloadTime, RotateMode.FastBeyond360)
-                .SetRelative(true).SetEase(Ease.OutBack));
+            _reloadAnim = m_model.transform.DOLocalRotate(new Vector3(360, 360, 0), _reloadTime, RotateMode.FastBeyond360)
+                .SetRelative(true).SetEase(Ease.OutBack);
 
             yield return new WaitForSeconds(_reloadTime);
             _currentMagSize = _magSize;
             _isReloading = false;
             _onFinishReloading?.Invoke();
         }
-    }
+
+        private void WaitingPickup ()
+        {
+	        _idleAnim = m_model.transform.DOScale(1.2f, 1).From(_defaultScale).SetLoops(-1, LoopType.Yoyo);
+        }
+        private void KillTweenOnWeapon ()
+        {
+	        _idleAnim.Kill();
+	        _reloadAnim.Kill();
+			m_model.transform.DOScale(_defaultScale, 0.2f);
+        }
+
+        private void OnDestroy()
+        {
+	        _idleAnim.Kill();
+	        _reloadAnim.Kill();
+		}
+	}
 }
