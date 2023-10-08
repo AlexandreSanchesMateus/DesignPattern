@@ -414,24 +414,28 @@ MonoBehaviour:
   _enemyPools:
   - {fileID: 2486633185255657860, guid: 90459093b91e7ff43b25570aeda2cf1e, type: 3}
   - {fileID: 2486633185255657860, guid: 84771d66e5a052040bf68028740d5e6e, type: 3}
+  - {fileID: 4235209392255916051, guid: ea3b7383f90c3274c9483d0fa50e04b5, type: 3}
   _roomWaves:
-  - _enemies:
-    - _poolIndex: 0
-      _nbEnemies: 3
-      _master: {fileID: 3980822658154817119}
-    - _poolIndex: 1
-      _nbEnemies: 6
-      _master: {fileID: 3980822658154817119}
   - _enemies:
     - _poolIndex: 0
       _nbEnemies: 1
       _master: {fileID: 3980822658154817119}
+    - _poolIndex: 1
+      _nbEnemies: 2
+      _master: {fileID: 3980822658154817119}
+  - _enemies:
+    - _poolIndex: 2
+      _nbEnemies: 1
+      _master: {fileID: 3980822658154817119}
   - _enemies:
     - _poolIndex: 0
-      _nbEnemies: 15
+      _nbEnemies: 10
       _master: {fileID: 3980822658154817119}
     - _poolIndex: 1
-      _nbEnemies: 30
+      _nbEnemies: 10
+      _master: {fileID: 3980822658154817119}
+    - _poolIndex: 2
+      _nbEnemies: 10
       _master: {fileID: 3980822658154817119}
 --- !u!1 &7766119156685349043
 GameObject:

@@ -84,7 +84,9 @@ namespace Game
 
         private IEnumerator Shooting()
         {
+            _weapon.SetOrientation((_playerEntity.Instance.transform.position - _root.transform.position).normalized);
             _weapon.PullTrigger();
+
             float shootingTime = Random.Range(_shootingTime - _aroundShootingTime, _shootingTime + _aroundShootingTime);
 
             while (shootingTime > 0)

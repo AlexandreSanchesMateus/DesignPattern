@@ -137,18 +137,18 @@ MonoBehaviour:
   _roomWaves:
   - _enemies:
     - _poolIndex: 0
-      _nbEnemies: 6
+      _nbEnemies: 5
       _master: {fileID: 8942161574118177293}
   - _enemies:
     - _poolIndex: 1
-      _nbEnemies: 8
+      _nbEnemies: 3
       _master: {fileID: 8942161574118177293}
   - _enemies:
     - _poolIndex: 1
       _nbEnemies: 4
       _master: {fileID: 8942161574118177293}
     - _poolIndex: 0
-      _nbEnemies: 10
+      _nbEnemies: 5
       _master: {fileID: 8942161574118177293}
   - _enemies:
     - _poolIndex: 0

@@ -28,7 +28,9 @@ namespace Game
         {
             command.Instance.AddObjectToRewind(gameObject);
             _defaultModelScale = Model.transform.localScale;
-		}
+
+            _health.Revive();
+        }
 
         public virtual void OnEnable()
         {

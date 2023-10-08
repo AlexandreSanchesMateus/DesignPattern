@@ -203,10 +203,15 @@ MonoBehaviour:
   - {fileID: 2021996443269943968}
   _enemyPools:
   - {fileID: 2486633185255657860, guid: 90459093b91e7ff43b25570aeda2cf1e, type: 3}
+  - {fileID: 4235209392255916051, guid: ea3b7383f90c3274c9483d0fa50e04b5, type: 3}
   _roomWaves:
   - _enemies:
     - _poolIndex: 0
       _nbEnemies: 1
+      _master: {fileID: 8688996317938972731}
+  - _enemies:
+    - _poolIndex: 1
+      _nbEnemies: 5
       _master: {fileID: 8688996317938972731}
 --- !u!1 &1393976173251375959
 GameObject:

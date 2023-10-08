@@ -95,14 +95,15 @@ MonoBehaviour:
   - {fileID: 312099081497875162}
   _enemyPools:
   - {fileID: 2486633185255657860, guid: 90459093b91e7ff43b25570aeda2cf1e, type: 3}
+  - {fileID: 4235209392255916051, guid: ea3b7383f90c3274c9483d0fa50e04b5, type: 3}
   _roomWaves:
   - _enemies:
     - _poolIndex: 0
-      _nbEnemies: 10
+      _nbEnemies: 7
       _master: {fileID: 5152589854710588616}
   - _enemies:
-    - _poolIndex: 0
-      _nbEnemies: 10
+    - _poolIndex: 1
+      _nbEnemies: 4
       _master: {fileID: 5152589854710588616}
 --- !u!1 &3021950023202750504
 GameObject:

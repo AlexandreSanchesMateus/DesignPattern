@@ -1,10 +1,8 @@
 using NaughtyAttributes;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Assertions;
 
 namespace Game
@@ -12,8 +10,15 @@ namespace Game
     public class Health : MonoBehaviour, IHealth
     {
         [SerializeField] private int _maxHealth;
-
         [SerializeField] private Entity _entityRef;
+
+        [SerializeField, Foldout("Events")] private UnityEvent _onTakeDamage;
+        [SerializeField, Foldout("Events")] private UnityEvent _onRegen;
+        [SerializeField, Foldout("Events")] private UnityEvent _onDie;
+
+        public event UnityAction OnTakeDamager { add => _onTakeDamage.AddListener(value); remove => _onTakeDamage.RemoveListener(value); }
+        public event UnityAction OnRegen { add => _onRegen.AddListener(value); remove => _onRegen.RemoveListener(value); }
+        public event UnityAction OnDie { add => _onDie.AddListener(value); remove => _onDie.RemoveListener(value); }
 
         private Sequence _takeDamageSequence;
 
@@ -28,9 +33,6 @@ namespace Game
         public bool IsDead => CurrentHealth <= 0;
         public int MaxHealth { get => _maxHealth; }
 
-        public event Action<int> OnDamage;
-        public event Action<int> OnRegen;
-        public event Action OnDie;
 
         public void TakeDamage(int amount)
         {
@@ -38,19 +40,21 @@ namespace Game
             if (IsDead) return;
 
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
-            OnDamage?.Invoke(amount);
+            _onTakeDamage?.Invoke();
 
             DamageEffect();
 
 			if (IsDead)
                 InternalDie();
         }
+
         public void Regen(int amount)
         {
             Assert.IsTrue(amount >= 0);
             if (IsDead) return;
             InternalRegen(amount);
         }
+
         public void Kill()
         {
             if (IsDead) return;
@@ -68,13 +72,13 @@ namespace Game
 
             var old = CurrentHealth;
             CurrentHealth = Mathf.Min(_maxHealth, CurrentHealth + amount);
-            OnRegen?.Invoke(CurrentHealth - old);
+            _onRegen?.Invoke();
         }
 
         void InternalDie()
         {
             CurrentHealth = 0;
-            OnDie?.Invoke();
+            _onDie?.Invoke();
         }
 
         private void DamageEffect()
