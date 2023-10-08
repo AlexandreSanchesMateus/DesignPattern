@@ -70,10 +70,18 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 1528954233045646218, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2750717334413120766, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
       propertyPath: _entityRef
       value: 
       objectReference: {fileID: 1540528169701859278}
+    - target: {fileID: 2880931813937602012, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2903873710831780085, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
       propertyPath: _speed
       value: 5000
@@ -193,6 +201,7 @@ MonoBehaviour:
   <command>k__BackingField: {fileID: 11400000, guid: 7e0aa14f413d68f44af409f011a83784, type: 2}
   _model: {fileID: 2544495301141333554}
   _spriteRenderer: {fileID: 4219203621190349669}
+  _defaultModelScale: {x: 0, y: 0, z: 0}
   m_returnToPool: {fileID: 3421383754496600775}
   m_enemyPool: {fileID: 2486633185255657860}
 --- !u!114 &3421383754496600775

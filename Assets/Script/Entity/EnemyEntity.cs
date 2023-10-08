@@ -14,11 +14,29 @@ namespace Game
 		public ReturnToPool<EnemyEntity> ReturnToPool => m_returnToPool;
 		public EnemyPool EnnemyPool => m_enemyPool;
 
-        public void DeathFeedBack(Action feedBack)
+        private RoomManager _manager;
+
+        public override void OnEnable()
         {
-            _health.OnDie += feedBack;
+            base.OnEnable();
+            _health.OnDie += ReportToRoomManager;
         }
 
+        public override void OnDisable()
+        {
+            base.OnDisable();
+            _health.OnDie -= ReportToRoomManager;
+        }
+
+        public void SetRoomManager(RoomManager manager) => _manager = manager;
+        
+        private void ReportToRoomManager()
+        {
+            _manager.CheckRemainingEnemies();
+            _manager = null;
+        }
+
+        // Object Pool
         public void OnObjectCreatedForPool()
         {
             

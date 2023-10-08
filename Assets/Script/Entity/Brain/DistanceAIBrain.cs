@@ -46,11 +46,22 @@ namespace Game
             _weapon = _weaponObject.GetComponent<IWeaponable>();
         }
 
+        private void OnEnable()
+        {
+            _root.Health.OnDie += Deinitialize;
+        }
+
+        private void OnDisable()
+        {
+            _root.Health.OnDie -= Deinitialize;
+        }
+
         private void Update()
         {
             switch (_currentState)
             {
                 case EAIStat.MOVING:
+                    _previousState = EAIStat.MOVING;
                     if (IsPlayerTooNear)
                     {
                         _currentState = EAIStat.SHOOTING;
@@ -87,6 +98,11 @@ namespace Game
             _weapon.Reload();
             yield return new WaitForSeconds(2);
             _currentState = EAIStat.MOVING;
+        }
+
+        private void Deinitialize()
+        {
+            StopAllCoroutines();
         }
     }
 }

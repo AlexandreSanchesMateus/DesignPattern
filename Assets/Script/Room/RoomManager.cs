@@ -237,7 +237,7 @@ namespace Game
                     for (int i = 0; i < ennemies._nbEnemies; i++)
                     {
                         EnemyEntity instance = _enemyPools[ennemies._poolIndex].Pool.Get();
-                        instance.DeathFeedBack(CheckRemainingEnemies);
+                        instance.SetRoomManager(this);
                         instance.transform.position = GetRandomPositionInRoom();
                     }
  

@@ -107,13 +107,21 @@ MonoBehaviour:
   _onRoomUnlock:
     m_PersistentCalls:
       m_Calls: []
+  _onStageChange:
+    m_PersistentCalls:
+      m_Calls: []
   _roomBounds:
   - {fileID: 7820666388403429870}
   - {fileID: 5670510003909745}
   - {fileID: 3061355175769288338}
   - {fileID: 2021996443269943968}
-  _enemyPools: []
-  _roomWaves: []
+  _enemyPools:
+  - {fileID: 2486633185255657860, guid: 90459093b91e7ff43b25570aeda2cf1e, type: 3}
+  _roomWaves:
+  - _enemies:
+    - _poolIndex: 0
+      _nbEnemies: 1
+      _master: {fileID: 8688996317938972731}
 --- !u!1 &1393976173251375959
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,7 +284,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0970726, y: 0.0036315918}
+  m_Offset: {x: 0.27173233, y: 0.0036315918}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -287,7 +295,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7390213, y: 2.7319489}
+  m_Size: {x: 0.38970184, y: 2.7319489}
   m_EdgeRadius: 0
 --- !u!114 &6987075842150372432
 MonoBehaviour:

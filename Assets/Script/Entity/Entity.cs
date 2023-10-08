@@ -23,20 +23,19 @@ namespace Game
         public Vector3 DefaultModelScale => _defaultModelScale;
         [SerializeField] private Vector3 _defaultModelScale;
 
-        private void OnEnable()
-        {
-            // Invoker = Command.Instance;
-            command.Instance.AddObjectToRewind(gameObject);
-        }
+
         private void Start()
         {
-            // Invoker = Command.Instance;
             command.Instance.AddObjectToRewind(gameObject);
-
             _defaultModelScale = Model.transform.localScale;
 		}
 
-        private void OnDisable()
+        public virtual void OnEnable()
+        {
+            command.Instance.AddObjectToRewind(gameObject);
+        }
+
+        public virtual void OnDisable()
         {
             command.Instance.DeleteFromRewind(gameObject);
         }

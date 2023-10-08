@@ -59,7 +59,6 @@ namespace Game
 
         public void Revive()
         {
-            Debug.Log("REVIVE !");
             CurrentHealth = _maxHealth;
         }
 

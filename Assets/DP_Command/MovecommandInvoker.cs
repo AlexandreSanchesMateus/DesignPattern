@@ -91,7 +91,6 @@ namespace Game
                 newRewindObject.gameObjectToRewind = objectToAdd;
                 _objectsToRewind.Add(newRewindObject);
             }
-
         }
 
         public void DeleteFromRewind(GameObject objectToAdd)

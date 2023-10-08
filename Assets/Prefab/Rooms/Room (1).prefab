@@ -106,18 +106,14 @@ MonoBehaviour:
   _roomWaves:
   - _enemies:
     - _poolIndex: 0
-      _nbEnemies: 3
+      _nbEnemies: 1
       _master: {fileID: 3283192545304042115}
   - _enemies:
     - _poolIndex: 1
-      _nbEnemies: 2
+      _nbEnemies: 1
       _master: {fileID: 3283192545304042115}
-  - _enemies:
     - _poolIndex: 0
-      _nbEnemies: 5
-      _master: {fileID: 3283192545304042115}
-    - _poolIndex: 1
-      _nbEnemies: 2
+      _nbEnemies: 1
       _master: {fileID: 3283192545304042115}
 --- !u!1 &1238167401117152154
 GameObject:
@@ -517,7 +513,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0033797026, y: 0}
+  m_Offset: {x: 0.0033797026, y: 0.13086033}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -528,7 +524,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.750725, y: 0.76348495}
+  m_Size: {x: 2.750725, y: 0.5017643}
   m_EdgeRadius: 0
 --- !u!114 &1005328484928582711
 MonoBehaviour:
@@ -619,7 +615,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00000047683716, y: 0.009954929}
+  m_Offset: {x: -0.14600897, y: 0.009954929}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -630,7 +626,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7455721, y: 2.7246962}
+  m_Size: {x: 0.4535532, y: 2.7246962}
   m_EdgeRadius: 0
 --- !u!114 &3799318231480821565
 MonoBehaviour:
