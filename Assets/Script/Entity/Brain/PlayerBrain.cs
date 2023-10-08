@@ -57,6 +57,7 @@ namespace Game
 
         private void Start()
         {
+            Cursor.visible = false;
             // move
             _moveInput.action.started += UpdateMove;
             _moveInput.action.performed += UpdateMove;
