@@ -11,7 +11,9 @@ namespace Game
 
         [SerializeField, BoxGroup("Dependencies")] private EnemyEntity _root;
         [SerializeField, BoxGroup("Dependencies")] private EntityMovement _movement;
-        [SerializeField, BoxGroup("Dependencies")] private IWeaponable _weapon;
+        [SerializeField, BoxGroup("Dependencies")] private GameObject _weaponObject;
+
+        private IWeaponable _weapon;
 
         [SerializeField, BoxGroup("Conf")] private float _stopDistance;
         [SerializeField, BoxGroup("Conf")] private float _shootingTime;
@@ -40,6 +42,8 @@ namespace Game
         {
             _currentState = EAIStat.MOVING;
             _previousState = _currentState;
+
+            _weapon = _weaponObject.GetComponent<IWeaponable>();
         }
 
         private void Update()

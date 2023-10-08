@@ -9,5 +9,9 @@ namespace Game
 	public interface IPoolableObject<T> where T : Component
 	{
 		public ReturnToPool<T> ReturnToPool { get; }
+
+		public void OnObjectGetFromPool();
+		public void OnObjectReturnToPool();
+		public void OnObjectCreatedForPool();
 	}
 }

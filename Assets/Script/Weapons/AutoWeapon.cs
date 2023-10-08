@@ -17,8 +17,22 @@ namespace Game.Weapon
         [SerializeField, Foldout("Event")] private UnityEvent _onContinueShooting;
         [SerializeField, Foldout("Event")] private UnityEvent _onStopChooting;
 
+        private bool _isTriggerPressed = false;
+
+        private void Start()
+        {
+            _onFinishReloading.AddListener(CheckTriggerAfterReload);
+        }
+
+        private void OnDestroy()
+        {
+            _onFinishReloading.RemoveListener(CheckTriggerAfterReload);
+        }
+
         public override void PullTrigger()
         {
+            _isTriggerPressed = true;
+
             if (_isReloading) return;
 
             InvokeRepeating(nameof(InstanceBullet), 0F, _fireRate);
@@ -27,6 +41,8 @@ namespace Game.Weapon
 
         public override void ReleaseTrigger()
         {
+            _isTriggerPressed = false;
+
             if (_isReloading) return;
 
             CancelInvoke();
@@ -37,7 +53,6 @@ namespace Game.Weapon
         {
 			Bullet bullet = _bulletPool.Pool.Get();
 			bullet.Init(_firePoint.transform.position, Direction, 300);
-            //bullet.onBulletHit += () => bullet.ObjectPool.Pool.Release(bullet);
 
             _onContinueShooting?.Invoke();
 
@@ -46,6 +61,12 @@ namespace Game.Weapon
                 StartCoroutine(ReloadWeapon());
                 CancelInvoke();
             }
+        }
+
+        private void CheckTriggerAfterReload ()
+        {
+            if (_isTriggerPressed)
+                InvokeRepeating(nameof(InstanceBullet), 0F, _fireRate);
         }
     }
 }

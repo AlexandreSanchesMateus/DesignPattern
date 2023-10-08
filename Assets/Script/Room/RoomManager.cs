@@ -236,8 +236,8 @@ namespace Game
                 {
                     for (int i = 0; i < ennemies._nbEnemies; i++)
                     {
-                        GameObject instance = _enemyPools[ennemies._poolIndex].Pool.Get().gameObject;
-                        // Set ennemi manager
+                        EnemyEntity instance = _enemyPools[ennemies._poolIndex].Pool.Get();
+                        instance.DeathFeedBack(CheckRemainingEnemies);
                         instance.transform.position = GetRandomPositionInRoom();
                     }
  
@@ -252,7 +252,7 @@ namespace Game
         {
             if(--_currentEnnemiesNumber <= 0)
             {
-                StartNextWave();
+                Invoke(nameof(StartNextWave), 1.2f);
             }
         }
     }

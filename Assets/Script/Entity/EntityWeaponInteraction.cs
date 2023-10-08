@@ -15,25 +15,26 @@ namespace Game.Weapon
         [SerializeField, Foldout("Event")] private UnityEvent _onChangeWeapon;
 
         private WeaponProxy _weaponHold = null;
-        private WeaponProxy _previousWeapon = null;
+
+        private HashSet<WeaponProxy> _previousWeapons = new HashSet<WeaponProxy>();
 
         public void SetOverWeapon(WeaponProxy _weaponOver)
         {
-            if (_weaponOver == _previousWeapon) return;
+            if (_previousWeapons.Contains(_weaponOver)) return;
 
             if (_weaponHold != null)
                 DropWeapon();
 
             _weaponHold = _weaponOver;
-            _previousWeapon = _weaponHold;
-
             _weaponHold.PickUp(_handPosition);
         }
 
         public void ExitWeapon(WeaponProxy _weaponExit)
         {
-            if (_weaponExit != _weaponHold && _weaponExit == _previousWeapon)
-                _previousWeapon = null;
+            if (_weaponExit != _weaponHold && _previousWeapons.Contains(_weaponExit))
+            {
+                _previousWeapons.Remove(_weaponExit);
+            }
         }
 
         public void DropWeapon()
@@ -41,6 +42,7 @@ namespace Game.Weapon
             if (_weaponHold != null)
                 _weaponHold.Drop();
 
+            _previousWeapons.Add(_weaponHold);
             _weaponHold = null;
         }
 
@@ -49,6 +51,7 @@ namespace Game.Weapon
             if (_weaponHold != null)
                 _weaponHold.Throw();
 
+            _previousWeapons.Add(_weaponHold);
             _weaponHold = null;
         }
 

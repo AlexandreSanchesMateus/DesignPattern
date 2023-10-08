@@ -7,5 +7,6 @@ namespace Game
 	[RequireComponent(typeof(ReturnEnemyToPool))]
 	public class EnemyPool : ObjectPool<EnemyEntity>
 	{
-	}
+        
+    }
 }

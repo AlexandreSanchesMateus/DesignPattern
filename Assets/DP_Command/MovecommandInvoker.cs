@@ -13,6 +13,7 @@ namespace Game
         public GameObject gameObjectToRewind;
         public Stack<IcommandMovement> _commandList = new Stack<IcommandMovement>();
     }
+
     [Serializable]
     public class MovecommandInvoker:MonoBehaviour
     {
@@ -25,6 +26,7 @@ namespace Game
         {
             SaveCycle();
         }
+
         private void SaveCycle()
         {
             StartCoroutine(Cycle());
@@ -39,6 +41,7 @@ namespace Game
                 StartCoroutine(Cycle());
             }
         }
+
         public void AddCommand()
         {
             foreach (RewindObjects item in _objectsToRewind)
@@ -55,7 +58,6 @@ namespace Game
             //Debug.Log("addlist");
             //return;
         }
-
 
         public void UndoCommand(bool input)
         {
@@ -86,12 +88,14 @@ namespace Game
                     StartCoroutine(RewindCouro());
             }
         }
+
         public void AddObjectToRewind(GameObject objectToAdd)
         {
             RewindObjects newRewindObject = new RewindObjects();
             newRewindObject.gameObjectToRewind = objectToAdd;
             _objectsToRewind.Add(newRewindObject);
         }
+
         public void DeleteFromRewind(GameObject objectToAdd)
         {
             _objectsToRewind.Remove(_objectsToRewind.First(x => x.gameObjectToRewind == objectToAdd));

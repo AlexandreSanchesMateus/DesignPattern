@@ -30,9 +30,23 @@ namespace Game
 
 		void OnCollisionEnter2D ( Collision2D _collision )
 		{
-			onBulletHit?.Invoke();
-
 			_collision.gameObject.GetComponent<IHealth>()?.TakeDamage(10);
+			onBulletHit?.Invoke();
 		}
-	}
+
+        public void OnObjectGetFromPool()
+        {
+            
+        }
+
+        public void OnObjectReturnToPool()
+        {
+            
+        }
+
+        public void OnObjectCreatedForPool()
+        {
+            
+        }
+    }
 }
