@@ -79,17 +79,26 @@ namespace Game
 
         private void DamageEffect()
         {
-	        _entityRef.transform.localScale = _entityRef.DefaultModelScale;
-	        _takeDamageSequence = DOTween.Sequence();
+            if (_takeDamageSequence.IsActive())
+                _takeDamageSequence.Restart();
+            else
+            {
+                _entityRef.transform.localScale = _entityRef.DefaultModelScale;
+                _entityRef.SpriteRenderer.color = Color.white;
+                _takeDamageSequence = DOTween.Sequence();
 
-	        _takeDamageSequence.Append(_entityRef.Model.transform.DOPunchScale(Vector3.one * 0.2f, 0.1f));
-	        _takeDamageSequence.Append(_entityRef.SpriteRenderer.DOColor(Color.red, 0.1f).From(Color.white)
-		        .OnComplete(() => _entityRef.SpriteRenderer.DOColor(Color.white, 0.1f)));
-		}
+                _takeDamageSequence.Append(_entityRef.Model.transform.DOPunchScale(Vector3.one * 0.2f, 0.1f));
+                _takeDamageSequence.Append(_entityRef.SpriteRenderer.DOColor(Color.red, 0.1f).From(Color.white)
+                    .OnComplete(() => _entityRef.SpriteRenderer.DOColor(Color.white, 0.1f)));
+                _takeDamageSequence.OnKill(() => _takeDamageSequence = null);
+            }
+        }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             _takeDamageSequence.Kill();
+            _entityRef.transform.localScale = _entityRef.DefaultModelScale;
+            _entityRef.SpriteRenderer.color = Color.white;
         }
     }
 }

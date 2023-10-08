@@ -16,7 +16,7 @@ namespace Game.Weapon
         [SerializeField, BoxGroup("Set up")] protected GameObject m_model;
 
         [SerializeField, BoxGroup("Commun")] private int _magSize;
-        [SerializeField, BoxGroup("Commun")] private int _reloadTime;
+        [SerializeField, BoxGroup("Commun")] private float _reloadTime;
         [SerializeField, BoxGroup("Commun")] private float _throwForce;
 
         [SerializeField, Foldout("Event")] protected UnityEvent _onPickUp;
@@ -38,10 +38,14 @@ namespace Game.Weapon
 		protected virtual void Start()
         {
             _currentMagSize = _magSize;
-
             _defaultScale = this.transform.localScale;
-
             WaitingPickup();
+        }
+
+        private void OnEnable()
+        {
+            _currentMagSize = _magSize;
+            _isReloading = false;
         }
 
         #region Interface IPickable
@@ -118,6 +122,7 @@ namespace Game.Weapon
         {
 	        _idleAnim = m_model.transform.DOScale(1.2f, 1).From(_defaultScale).SetLoops(-1, LoopType.Yoyo);
         }
+
         private void KillTweenOnWeapon ()
         {
 	        _idleAnim.Kill();

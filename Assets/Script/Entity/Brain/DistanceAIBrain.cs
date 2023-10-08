@@ -40,20 +40,20 @@ namespace Game
 
         private void Start()
         {
-            _currentState = EAIStat.MOVING;
-            _previousState = _currentState;
-
             _weapon = _weaponObject.GetComponent<IWeaponable>();
         }
 
         private void OnEnable()
         {
-            _root.Health.OnDie += Deinitialize;
+            _currentState = EAIStat.MOVING;
+            _previousState = _currentState;
+            // _root.Health.OnDie += Deinitialize;
         }
 
         private void OnDisable()
         {
-            _root.Health.OnDie -= Deinitialize;
+            StopAllCoroutines();
+            _weapon.ReleaseTrigger();
         }
 
         private void Update()
@@ -98,11 +98,6 @@ namespace Game
             _weapon.Reload();
             yield return new WaitForSeconds(2);
             _currentState = EAIStat.MOVING;
-        }
-
-        private void Deinitialize()
-        {
-            StopAllCoroutines();
         }
     }
 }
