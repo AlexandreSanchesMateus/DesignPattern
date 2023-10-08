@@ -19,6 +19,11 @@ namespace Game
             // Invoker = Command.Instance;
             command.Instance.AddObjectToRewind(gameObject);
         }
+        private void Start()
+        {
+            // Invoker = Command.Instance;
+            command.Instance.AddObjectToRewind(gameObject);
+        }
 
         private void OnDisable()
         {
