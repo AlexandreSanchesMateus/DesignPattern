@@ -19,8 +19,9 @@ namespace Game.Weapon
 
         private bool _isTriggerPressed = false;
 
-        private void Start()
+        protected override void Start()
         {
+	        base.Start();
             _onFinishReloading.AddListener(CheckTriggerAfterReload);
         }
 

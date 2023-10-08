@@ -120,7 +120,7 @@ MonoBehaviour:
   _firePoint: {fileID: 6381724366297656146}
   _rb: {fileID: 2805800873844724108}
   _collider: {fileID: 4399168626238464541}
-  _render: {fileID: 0}
+  _render: {fileID: 7054901235675983869}
   _magSize: 30
   _reloadTime: 3
   _throwForce: 700
@@ -246,5 +246,10 @@ GameObject:
 --- !u!4 &6381724366297656146 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8874547244046061070, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
+  m_PrefabInstance: {fileID: 2574029069958636892}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &7054901235675983869 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4778533088534170273, guid: 91aea352b27571c4c9276780c9e0388d, type: 3}
   m_PrefabInstance: {fileID: 2574029069958636892}
   m_PrefabAsset: {fileID: 0}
