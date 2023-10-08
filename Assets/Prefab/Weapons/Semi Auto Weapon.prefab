@@ -102,6 +102,7 @@ MonoBehaviour:
   _rb: {fileID: 2805800873844724108}
   _collider: {fileID: 4399168626238464541}
   _render: {fileID: 7054901235675983869}
+  m_model: {fileID: 4989110816799555933}
   _magSize: 12
   _reloadTime: 5
   _throwForce: 800
@@ -120,7 +121,7 @@ MonoBehaviour:
   _onFinishReloading:
     m_PersistentCalls:
       m_Calls: []
-  m_model: {fileID: 4989110816799555933}
+  _recoilEffectIntensity: 2
   _shotTime: 0.1
   _bulletPool: {fileID: 3958626959843017837, guid: f239b492212ea5b488049c7b1a77aa0a, type: 3}
   _onShoot:

@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -36,6 +37,8 @@ namespace Game.Weapon
         {
             Bullet bullet = _bulletPool.Pool.Get();
             bullet.Init(_firePoint.transform.position, Direction, 300);
+
+            m_model.transform.DOPunchScale(Vector3.one * (_recoilEffectIntensity / 10), 0.1f);
 
 			if (--_currentMagSize <= 0)
                 StartCoroutine(ReloadWeapon());

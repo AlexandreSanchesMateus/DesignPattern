@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
@@ -30,6 +31,8 @@ namespace Game.Weapon
         protected bool _isReloading { get; private set;}
 
         protected Vector2 Direction { get; private set; }
+
+        [SerializeField] protected float _recoilEffectIntensity = 1f;
 
         private Tween _idleAnim;
         private Vector3 _defaultScale;

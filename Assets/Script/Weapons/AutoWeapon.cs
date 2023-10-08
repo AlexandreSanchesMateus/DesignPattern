@@ -1,3 +1,4 @@
+using DG.Tweening;
 using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
@@ -57,7 +58,9 @@ namespace Game.Weapon
 
             _onContinueShooting?.Invoke();
 
-            if(--_currentMagSize <= 0)
+            m_model.transform.transform.DOPunchScale(Vector3.one * (_recoilEffectIntensity / 10), 0.1f);
+
+			if (--_currentMagSize <= 0)
             {
                 StartCoroutine(ReloadWeapon());
                 CancelInvoke();
