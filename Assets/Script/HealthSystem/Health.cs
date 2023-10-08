@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -12,10 +13,14 @@ namespace Game
     {
         [SerializeField] private int _maxHealth;
 
+        [SerializeField] private Entity _entityRef;
+
+        private Sequence _takeDamageSequence;
+
         /// <summary>
-        /// coucou
-        /// </summary>
-        public int CurrentHealth
+		/// coucou
+		/// </summary>
+		public int CurrentHealth
         {
             get;
             private set;
@@ -35,7 +40,9 @@ namespace Game
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
             OnDamage?.Invoke(amount);
 
-            if (IsDead)
+            DamageEffect();
+
+			if (IsDead)
                 InternalDie();
         }
         public void Regen(int amount)
@@ -69,6 +76,21 @@ namespace Game
         {
             CurrentHealth = 0;
             OnDie?.Invoke();
+        }
+
+        private void DamageEffect()
+        {
+	        _entityRef.transform.localScale = _entityRef.DefaultModelScale;
+	        _takeDamageSequence = DOTween.Sequence();
+
+	        _takeDamageSequence.Append(_entityRef.Model.transform.DOPunchScale(Vector3.one * 0.2f, 0.1f));
+	        _takeDamageSequence.Append(_entityRef.SpriteRenderer.DOColor(Color.red, 0.1f).From(Color.white)
+		        .OnComplete(() => _entityRef.SpriteRenderer.DOColor(Color.white, 0.1f)));
+		}
+
+        private void OnDestroy()
+        {
+            _takeDamageSequence.Kill();
         }
     }
 }

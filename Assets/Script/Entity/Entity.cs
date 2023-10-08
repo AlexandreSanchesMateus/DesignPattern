@@ -14,6 +14,15 @@ namespace Game
  
         public Health Health => _health;
 
+        public GameObject Model => _model;
+        [SerializeField] private GameObject _model;
+
+        public SpriteRenderer SpriteRenderer => _spriteRenderer;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+
+        public Vector3 DefaultModelScale => _defaultModelScale;
+        [SerializeField] private Vector3 _defaultModelScale;
+
         private void OnEnable()
         {
             // Invoker = Command.Instance;
@@ -23,7 +32,9 @@ namespace Game
         {
             // Invoker = Command.Instance;
             command.Instance.AddObjectToRewind(gameObject);
-        }
+
+            _defaultModelScale = Model.transform.localScale;
+		}
 
         private void OnDisable()
         {

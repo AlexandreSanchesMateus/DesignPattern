@@ -70,6 +70,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 2750717334413120766, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
+      propertyPath: _entityRef
+      value: 
+      objectReference: {fileID: 1540528169701859278}
     - target: {fileID: 2903873710831780085, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
       propertyPath: _speed
       value: 5000
@@ -152,6 +156,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5882509366201892112, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
   m_PrefabInstance: {fileID: 6261524904808318133}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2544495301141333554 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8478795163881341575, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
+  m_PrefabInstance: {fileID: 6261524904808318133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5278354474510773815 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2280260485013203586, guid: a25403db85ec5f24c86189b35f44f1a7, type: 3}
@@ -182,6 +191,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: {fileID: 8127279266068467787}
   <command>k__BackingField: {fileID: 11400000, guid: 7e0aa14f413d68f44af409f011a83784, type: 2}
+  _model: {fileID: 2544495301141333554}
+  _spriteRenderer: {fileID: 4219203621190349669}
   m_returnToPool: {fileID: 3421383754496600775}
   m_enemyPool: {fileID: 2486633185255657860}
 --- !u!114 &3421383754496600775
@@ -301,5 +312,10 @@ PrefabInstance:
 --- !u!4 &4219203620023399803 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5720277353491606260, guid: 4843c6294db27f84bb07ff202205e1ea, type: 3}
+  m_PrefabInstance: {fileID: 8498044714163724175}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &4219203621190349669 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5720277354388581610, guid: 4843c6294db27f84bb07ff202205e1ea, type: 3}
   m_PrefabInstance: {fileID: 8498044714163724175}
   m_PrefabAsset: {fileID: 0}
