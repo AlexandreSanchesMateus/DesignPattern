@@ -46,17 +46,11 @@ namespace Game
         {
             foreach (RewindObjects item in _objectsToRewind)
             {
-                //item.gameObjectToRewind;
-
                 IcommandMovement storedCommand = new EntityMovementCommand(item.gameObjectToRewind.transform.position);
                 //Debug.Log("RECORDING" + item.gameObjectToRewind.name + item._commandList.Count+ item.gameObjectToRewind.transform.position);
                 item._commandList.Push(storedCommand);
-
-                //item._commandList.Push(storedCommand);
                 storedCommand.Execute(item.gameObjectToRewind.transform.position);
             }
-            //Debug.Log("addlist");
-            //return;
         }
 
         public void UndoCommand(bool input)
@@ -92,8 +86,12 @@ namespace Game
         public void AddObjectToRewind(GameObject objectToAdd)
         {
             RewindObjects newRewindObject = new RewindObjects();
-            newRewindObject.gameObjectToRewind = objectToAdd;
-            _objectsToRewind.Add(newRewindObject);
+            if(!_objectsToRewind.Any(item => item.gameObjectToRewind == objectToAdd))
+            {
+                newRewindObject.gameObjectToRewind = objectToAdd;
+                _objectsToRewind.Add(newRewindObject);
+            }
+
         }
 
         public void DeleteFromRewind(GameObject objectToAdd)
