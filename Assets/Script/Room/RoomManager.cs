@@ -17,7 +17,7 @@ namespace Game
         public event UnityAction OnRoomUnlock { add => _onRoomUnlock.AddListener(value); remove => _onRoomUnlock.RemoveListener(value); }
         public event UnityAction OnStageChange { add => _onStageChange.AddListener(value); remove => _onStageChange.RemoveListener(value); }
 
-        [Space(3)]
+        [SerializeField] private GameObject _floorIndicator;
         [SerializeField, Tooltip("List of points delimiting the corners of the room. They must follow each other and clockwise.")] private Transform[] _roomBounds;
         [Header("Wave Settings")]
         [Space(3)]
@@ -118,6 +118,8 @@ namespace Game
         {
             CompileRoom();
             _currentWave = -1;
+
+            _floorIndicator.SetActive(false);
         }
 
         [Button]
@@ -219,7 +221,7 @@ namespace Game
         public void LockRoom()
         {
             _onRoomLock?.Invoke();
-            StartNextWave();
+            StartCoroutine(StartNextWave());
         }
 
         private void UnlockRoom()
@@ -227,22 +229,31 @@ namespace Game
             _onRoomUnlock?.Invoke();
         }
 
-        private void StartNextWave()
+        private IEnumerator StartNextWave()
         {
             if (++_currentWave < _roomWaves.Length)
             {
                 _currentEnnemiesNumber = 0;
+                yield return new WaitForSeconds(0.9f);
+                _floorIndicator.SetActive(true);
+                
                 foreach (EnemyType ennemies in _roomWaves[_currentWave]._enemies)
                 {
+                    _currentEnnemiesNumber += ennemies._nbEnemies;
+
                     for (int i = 0; i < ennemies._nbEnemies; i++)
                     {
+                        Vector2 randomPos = GetRandomPositionInRoom();
+                        _floorIndicator.transform.position = randomPos;
+
+                        yield return new WaitForSeconds(Random.Range(0.05f, 0.3f));
+
                         EnemyEntity instance = _enemyPools[ennemies._poolIndex].Pool.Get();
                         instance.SetRoomManager(this);
-                        instance.transform.position = GetRandomPositionInRoom();
+                        instance.transform.position = randomPos;
                     }
- 
-                   _currentEnnemiesNumber += ennemies._nbEnemies;
                 }
+                _floorIndicator.SetActive(false);
             }
             else
                 UnlockRoom();
@@ -252,7 +263,7 @@ namespace Game
         {
             if(--_currentEnnemiesNumber <= 0)
             {
-                Invoke(nameof(StartNextWave), 1.2f);
+                StartCoroutine(StartNextWave());
             }
         }
     }
